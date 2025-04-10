@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="atx0mg">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="atx0mg">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="TL;DR Just jump to the conclusion at last part if you think this write-up is too lengthy → CryptographyThnks fr th PwdsDescription:Read More →">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MetaCTF 2021">
+<meta property="og:url" content="https://jeff14994.github.io/2021/12/06/MetaCTF-2021/index.html">
+<meta property="og:site_name" content="atx0mg">
+<meta property="og:description" content="TL;DR Just jump to the conclusion at last part if you think this write-up is too lengthy → CryptographyThnks fr th PwdsDescription:Read More →">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1loWvhFY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/Bko7zDhFF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/rysjMv2YY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyUe7vhtY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryrq7w3tY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkGxEw3YF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sk5SNPnYK.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/ByOKNv2FF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJMhNP3FK.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkszSD3Kt.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1qLBvnKF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryqcy_3tY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/rkmlxunFY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1RIUwnKF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJQ6LD2Yt.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hk60UPnFt.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/SykSdD2FY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJMMwD2YF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJe2dPhYK.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJU4vDnFK.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyIWFw3YF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJvPvPhYY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/B15mYwnYF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkdctvhFF.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HysIqw3YF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJE9iD3FF.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyynivhtY.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/rk0RxwnYY.jpg">
+<meta property="article:published_time" content="2021-12-06T13:17:53.000Z">
+<meta property="article:modified_time" content="2025-04-10T03:37:48.563Z">
+<meta property="article:author" content="atx0mg">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/B1loWvhFY.jpg">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/portfolio.ico">
+    
+    <title>MetaCTF 2021 · atx0mg&#39;s Fortress</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>atx0mg's Fortress.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">atx0mg&#39;s Fortress.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">MetaCTF 2021</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                MetaCTF 2021
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="ctf">ctf</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">481</span>Reading time: <span class="post-count reading-time">3 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2021/12/06</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <p><a href="https://jeff14994.github.io/2021/12/06/MetaCTF-2021/#Fun" target="_self">TL;DR Just jump to the conclusion at last part if you think this write-up is too lengthy →</a></p>
+<h1 id="Cryptography"><a href="#Cryptography" class="headerlink" title="Cryptography"></a>Cryptography</h1><h2 id="Thnks-fr-th-Pwds"><a href="#Thnks-fr-th-Pwds" class="headerlink" title="Thnks fr th Pwds"></a><code>Thnks fr th Pwds</code></h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description:"></a>Description:</h3><p><img src="https://hackmd.io/_uploads/B1loWvhFY.jpg"><br><a href="https://jeff14994.github.io/2021/12/06/MetaCTF-2021/" target="_self">Read More →</a></p>
+<span id="more"></span>
+<ul>
+<li>It seems to be encoded as base64, so I decoded it in the following command<ul>
+<li><code>echo &quot;TWV0YUNURntlbmNvZGluZ19pc19OMFRfdGhlX3NhbWVfYXNfZW5jcnlwdGlvbiEhfQ==&quot; | base64 -d</code></li>
+<li><img src="https://hackmd.io/_uploads/Bko7zDhFF.jpg"><h3 id="Got-flag"><a href="#Got-flag" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+<li><code>MetaCTF&#123;encoding_is_N0T_the_same_as_encryption!!&#125;</code><h2 id="Wrong-Way-on-a-One-Way-Street"><a href="#Wrong-Way-on-a-One-Way-Street" class="headerlink" title="Wrong Way on a One Way Street"></a><code>Wrong Way on a One Way Street</code></h2><h3 id="Description-1"><a href="#Description-1" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/rysjMv2YY.jpg"></li>
+<li>Find the hash with online <a target="_blank" rel="noopener" href="https://crackstation.net/">cracking tools</a> and get:<ul>
+<li><img src="https://hackmd.io/_uploads/HyUe7vhtY.jpg"><h3 id="Got-flag-1"><a href="#Got-flag-1" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+<li><code>MetaCTF&#123;babyloka13&#125;</code><h2 id="Size-Matters"><a href="#Size-Matters" class="headerlink" title="Size Matters"></a><code>Size Matters</code></h2><h3 id="Description-2"><a href="#Description-2" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/ryrq7w3tY.jpg"></li>
+<li>Find the RSA with online <a target="_blank" rel="noopener" href="https://www.dcode.fr/rsa-cipher">cracking tools</a> and get:<ul>
+<li><img src="https://hackmd.io/_uploads/rkGxEw3YF.jpg"><h3 id="Got-flag-2"><a href="#Got-flag-2" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+<li><code>MetaCTF&#123;you_broke_rsa!&#125;</code><h1 id="Forensics"><a href="#Forensics" class="headerlink" title="Forensics"></a>Forensics</h1><h2 id="Magic-in-the-Hex"><a href="#Magic-in-the-Hex" class="headerlink" title="Magic in the Hex"></a><code>Magic in the Hex</code></h2><h3 id="Description-3"><a href="#Description-3" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/Sk5SNPnYK.jpg"></li>
+<li>Found the magic number of the <code>VMDK</code> file by <a target="_blank" rel="noopener" href="https://filesignatures.net/index.php?page=search&search=VMDK&mode=EXT">googling</a><ul>
+<li><img src="https://hackmd.io/_uploads/ByOKNv2FF.jpg"></li>
+</ul>
+</li>
+</ul>
+<h3 id="Got-flag-3"><a href="#Got-flag-3" class="headerlink" title="Got flag:"></a>Got flag:</h3><ul>
+<li><code>KDM</code><h2 id="Sharing-Files-and-Passwords"><a href="#Sharing-Files-and-Passwords" class="headerlink" title="Sharing Files and Passwords"></a><code>Sharing Files and Passwords</code></h2><h3 id="Description-4"><a href="#Description-4" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/BJMhNP3FK.jpg"></li>
+<li>Download the <code>pcap</code> file and filter the FTP protocol and the password revealed<ul>
+<li><img src="https://hackmd.io/_uploads/HkszSD3Kt.jpg"><h3 id="Got-flag-4"><a href="#Got-flag-4" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+<li><code>	METACTF&#123;ftp_is_better_than_dropbox&#125;</code><h2 id="Still-Believe-in-Magic"><a href="#Still-Believe-in-Magic" class="headerlink" title="Still Believe in Magic?"></a><code>Still Believe in Magic?</code></h2><h3 id="Description-5"><a href="#Description-5" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/r1qLBvnKF.jpg"></li>
+<li>Got a file, and when <code>file magic.tar.gz</code>, We got:  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">magic.tar.gz: gzip compressed data, last modified: Fri Dec  3 16:51:29 2021, from Unix, original size modulo 2^32 10240</span><br></pre></td></tr></table></figure>
+<ul>
+<li>It seems the flag is compressed in two kinds of methods (<code>.tar</code> and <code>.gz</code>), so we have to decompress it.<ul>
+<li>So first, I used <code>gzip -d magic.tar.gz</code> to get <code>magic.tar.</code></li>
+<li>And then, I used <code>tar -xf magic.tar</code> to get <code>magic.</code><ul>
+<li>from <code>file magic</code>, we can know <code>magic: Zip archive data, at least v2.0 to extract.</code></li>
+</ul>
+</li>
+<li>Lastly, I used <code>unzip magic</code> to get the magic file <ul>
+<li><img src="https://hackmd.io/_uploads/ryqcy_3tY.jpg"></li>
+</ul>
+</li>
+<li><code>cat flag</code><ul>
+<li><img src="https://hackmd.io/_uploads/rkmlxunFY.jpg"><h3 id="Got-flag-5"><a href="#Got-flag-5" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>MetaCTF&#123;was_it_a_magic_trick_or_magic_bytes?&#125;</code><h3 id="Referece"><a href="#Referece" class="headerlink" title="Referece"></a>Referece</h3></li>
+<li><a target="_blank" rel="noopener" href="https://help.nexcess.net/77285-other/how-to-decompress-files-in-gzip">How to decompress files in gzip</a></li>
+<li><a target="_blank" rel="noopener" href="https://linuxize.com/post/how-to-extract-unzip-tar-gz-file/">How to decompress files in tar</a><h1 id="Other"><a href="#Other" class="headerlink" title="Other"></a>Other</h1><h2 id="This-Ain-39-t-a-Scene-It-39-s-an-Encryption-Race"><a href="#This-Ain-39-t-a-Scene-It-39-s-an-Encryption-Race" class="headerlink" title="This Ain&#39;t a Scene, It&#39;s an Encryption Race"></a><code>This Ain&#39;t a Scene, It&#39;s an Encryption Race</code></h2><h3 id="Description-6"><a href="#Description-6" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/r1RIUwnKF.jpg"></li>
+<li>Find the Mitre ATT&amp;CK technique ID for the encryption of data by <a target="_blank" rel="noopener" href="https://attack.mitre.org/techniques/T1486/">googling</a><ul>
+<li><img src="https://hackmd.io/_uploads/rJQ6LD2Yt.jpg"><h3 id="Got-flag-6"><a href="#Got-flag-6" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+<li><code>T1486</code><h1 id="Reconnaissance"><a href="#Reconnaissance" class="headerlink" title="Reconnaissance"></a>Reconnaissance</h1><h2 id="Sugar-We-39-re-Goin-Up"><a href="#Sugar-We-39-re-Goin-Up" class="headerlink" title="Sugar, We&#39;re Goin Up"></a><code>Sugar, We&#39;re Goin Up</code></h2><h3 id="Description-7"><a href="#Description-7" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/Hk60UPnFt.jpg"></li>
+<li>Found that by <a target="_blank" rel="noopener" href="https://www.rapid7.com/blog/post/2021/11/01/gitlab-unauthenticated-remote-code-execution-cve-2021-22205-exploited-in-the-wild/">googling</a><ul>
+<li><img src="https://hackmd.io/_uploads/SykSdD2FY.jpg"> <h3 id="Got-flag-7"><a href="#Got-flag-7" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+<li><code>CVE-2021-22205</code><h2 id="The-Best-Laid-Plans"><a href="#The-Best-Laid-Plans" class="headerlink" title="The Best Laid Plans..."></a><code>The Best Laid Plans...</code></h2><h3 id="Description-8"><a href="#Description-8" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/rJMMwD2YF.jpg"></li>
+<li>Found that by <a target="_blank" rel="noopener" href="https://www.armis.com/blog/from-urgent11-to-frag44-microsoft-patches-critical-vulnerabilities-in-windows-tcpip-stack/">googling</a><ul>
+<li><img src="https://hackmd.io/_uploads/BJe2dPhYK.jpg"><h3 id="Got-flag-8"><a href="#Got-flag-8" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+<li><code>	MetaCTF&#123;Ipv4pReceiveRoutingHeader&#125;</code><h2 id="Who-Broke-the-Printer-This-Time"><a href="#Who-Broke-the-Printer-This-Time" class="headerlink" title="Who Broke the Printer This Time?"></a><code>Who Broke the Printer This Time?</code></h2><h3 id="Description-9"><a href="#Description-9" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/SJU4vDnFK.jpg"></li>
+<li>Found that by <a target="_blank" rel="noopener" href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2021-34527">googling</a><ul>
+<li><img src="https://hackmd.io/_uploads/HyIWFw3YF.jpg"><h3 id="Got-flag-9"><a href="#Got-flag-9" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+<li><code>CVE-2021-34527</code><h1 id="Web-Exploitation"><a href="#Web-Exploitation" class="headerlink" title="Web Exploitation"></a>Web Exploitation</h1><h2 id="Under-Inspection"><a href="#Under-Inspection" class="headerlink" title="Under Inspection"></a><code>Under Inspection</code></h2><h3 id="Description-10"><a href="#Description-10" class="headerlink" title="Description:"></a>Description:</h3><img src="https://hackmd.io/_uploads/SJvPvPhYY.jpg"></li>
+<li>There is an easy login-page<ul>
+<li><img src="https://hackmd.io/_uploads/B15mYwnYF.jpg"></li>
+</ul>
+</li>
+<li>I try to look around the <code>Network</code> by Developer’s tools and find something interesting:<ul>
+<li><img src="https://hackmd.io/_uploads/HkdctvhFF.png"><ul>
+<li>From the code, you can tell that if <code>username == &quot;Jazz&quot;</code>, the flag will return, so I did.</li>
+<li>Actually, the password is the flag<h3 id="Got-flag-10"><a href="#Got-flag-10" class="headerlink" title="Got flag:"></a>Got flag:</h3></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>MetaCTF&#123;do_it_with_style_or_dont_do_it_at_all&#125;	</code><h1 id="Conclusion-for-this-semester-ASU-CSE-466"><a href="#Conclusion-for-this-semester-ASU-CSE-466" class="headerlink" title="Conclusion for this semester (ASU CSE 466)"></a>Conclusion for this semester (ASU CSE 466)</h1><h3 id="Fun"><a href="#Fun" class="headerlink" title="Fun"></a>Fun</h3></li>
+<li>Although this is the last CTF game playing with the team <a target="_blank" rel="noopener" href="https://ctftime.org/team/162814"><code>ToInfinityAndBeYANd</code></a>, I had a lot of fun. Thank you all for playing CTF with me this semester. Plus, thank you Yan for providing this great opportunity for us to play CTF this whole semester. Have a lot of fun. Thanks! I’ll keep pushing until I get the yellow belt (even the blue belt)! LOL<br><img src="https://hackmd.io/_uploads/HysIqw3YF.jpg"><h3 id="Shout-out-to-all-the-teammates"><a href="#Shout-out-to-all-the-teammates" class="headerlink" title="Shout out to all the teammates!"></a>Shout out to all the teammates!</h3><img src="https://hackmd.io/_uploads/SJE9iD3FF.jpg"><h3 id="We-had-a-team-called-Hacker-in-discord"><a href="#We-had-a-team-called-Hacker-in-discord" class="headerlink" title="We had a team called Hacker in discord"></a>We had a team called <code>Hacker</code> in discord</h3></li>
+<li><img src="https://hackmd.io/_uploads/SyynivhtY.jpg"></li>
+</ul>
+<h3 id="I-solved-11-challenges-quite-a-fun-one"><a href="#I-solved-11-challenges-quite-a-fun-one" class="headerlink" title="I solved 11 challenges, quite a fun one"></a>I solved 11 challenges, quite a fun one</h3><ul>
+<li><img src="https://hackmd.io/_uploads/rk0RxwnYY.jpg"></li>
+</ul>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://jeff14994.github.io">atx0mg</a>
+            <p>Link：<a href="https://jeff14994.github.io/2021/12/06/MetaCTF-2021/">https://jeff14994.github.io/2021/12/06/MetaCTF-2021/</a>
+            <p>Publish date：<a href="https://jeff14994.github.io/2021/12/06/MetaCTF-2021/">December 6th 2021, 9:17:53 pm</a>
+            <p>Update date：<a href="https://jeff14994.github.io/2021/12/06/MetaCTF-2021/">April 10th 2025, 11:37:48 am</a>
+            <p>License：This article is licensed under CC BY-NC 4.0</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2022/03/11/write4-rop/" title="write4 rop">
+                    <div class="nextTitle">write4 rop</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2021/11/28/TFCCTF-2021/" title="TFCCTF 2021">
+                    <div class="prevTitle">TFCCTF 2021</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:jeff14994 [at] gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/jeff14994" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.facebook.com/jeff.hong.14994" class="iconfont-archer facebook" target="_blank" title=facebook></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.linkedin.com/in/jeff14994/" class="iconfont-archer linkedin" target="_blank" title=linkedin></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="https://hackmd.io/@jeff14994" class="iconfont-archer others" target="_blank" title=others></a>
+            
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Cryptography"><span class="toc-number">1.</span> <span class="toc-text">Cryptography</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Thnks-fr-th-Pwds"><span class="toc-number">1.1.</span> <span class="toc-text">Thnks fr th Pwds</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description"><span class="toc-number">1.1.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag"><span class="toc-number">1.1.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wrong-Way-on-a-One-Way-Street"><span class="toc-number">1.2.</span> <span class="toc-text">Wrong Way on a One Way Street</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-1"><span class="toc-number">1.2.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-1"><span class="toc-number">1.2.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Size-Matters"><span class="toc-number">1.3.</span> <span class="toc-text">Size Matters</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-2"><span class="toc-number">1.3.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-2"><span class="toc-number">1.3.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Forensics"><span class="toc-number">2.</span> <span class="toc-text">Forensics</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Magic-in-the-Hex"><span class="toc-number">2.1.</span> <span class="toc-text">Magic in the Hex</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-3"><span class="toc-number">2.1.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-3"><span class="toc-number">2.1.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Sharing-Files-and-Passwords"><span class="toc-number">2.2.</span> <span class="toc-text">Sharing Files and Passwords</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-4"><span class="toc-number">2.2.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-4"><span class="toc-number">2.2.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Still-Believe-in-Magic"><span class="toc-number">2.3.</span> <span class="toc-text">Still Believe in Magic?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-5"><span class="toc-number">2.3.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-5"><span class="toc-number">2.3.2.</span> <span class="toc-text">Got flag:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Referece"><span class="toc-number">2.3.3.</span> <span class="toc-text">Referece</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Other"><span class="toc-number">3.</span> <span class="toc-text">Other</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#This-Ain-39-t-a-Scene-It-39-s-an-Encryption-Race"><span class="toc-number">3.1.</span> <span class="toc-text">This Ain&#39;t a Scene, It&#39;s an Encryption Race</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-6"><span class="toc-number">3.1.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-6"><span class="toc-number">3.1.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Reconnaissance"><span class="toc-number">4.</span> <span class="toc-text">Reconnaissance</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Sugar-We-39-re-Goin-Up"><span class="toc-number">4.1.</span> <span class="toc-text">Sugar, We&#39;re Goin Up</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-7"><span class="toc-number">4.1.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-7"><span class="toc-number">4.1.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Best-Laid-Plans"><span class="toc-number">4.2.</span> <span class="toc-text">The Best Laid Plans...</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-8"><span class="toc-number">4.2.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-8"><span class="toc-number">4.2.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Who-Broke-the-Printer-This-Time"><span class="toc-number">4.3.</span> <span class="toc-text">Who Broke the Printer This Time?</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-9"><span class="toc-number">4.3.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-9"><span class="toc-number">4.3.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-Exploitation"><span class="toc-number">5.</span> <span class="toc-text">Web Exploitation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Under-Inspection"><span class="toc-number">5.1.</span> <span class="toc-text">Under Inspection</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Description-10"><span class="toc-number">5.1.1.</span> <span class="toc-text">Description:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-flag-10"><span class="toc-number">5.1.2.</span> <span class="toc-text">Got flag:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion-for-this-semester-ASU-CSE-466"><span class="toc-number">6.</span> <span class="toc-text">Conclusion for this semester (ASU CSE 466)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fun"><span class="toc-number">6.0.1.</span> <span class="toc-text">Fun</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Shout-out-to-all-the-teammates"><span class="toc-number">6.0.2.</span> <span class="toc-text">Shout out to all the teammates!</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#We-had-a-team-called-Hacker-in-discord"><span class="toc-number">6.0.3.</span> <span class="toc-text">We had a team called Hacker in discord</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#I-solved-11-challenges-quite-a-fun-one"><span class="toc-number">6.0.4.</span> <span class="toc-text">I solved 11 challenges, quite a fun one</span></a></li></ol></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span>
+            <a class="archive-post-title" href="/2022/07/04/AIS3-2022-Pre-exam/">AIS3 2022 Pre-exam</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/write4-rop/">write4 rop</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2021 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span>
+            <a class="archive-post-title" href="/2021/12/06/MetaCTF-2021/">MetaCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span>
+            <a class="archive-post-title" href="/2021/11/28/TFCCTF-2021/">TFCCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span>
+            <a class="archive-post-title" href="/2021/11/15/K3RN3LCTF-2021/">K3RN3LCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span>
+            <a class="archive-post-title" href="/2021/11/06/Dam-CTF-2021/">Dam CTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/31</span>
+            <a class="archive-post-title" href="/2021/10/31/Killer-Queen-CTF-2021/">Killer Queen CTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span>
+            <a class="archive-post-title" href="/2021/10/23/BuckeyeCTF-2021/">BuckeyeCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span>
+            <a class="archive-post-title" href="/2021/09/19/SunshineCTF-2021/">SunshineCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/13</span>
+            <a class="archive-post-title" href="/2021/09/13/CSAWCTF-2021/">CSAWCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span>
+            <a class="archive-post-title" href="/2021/08/28/FWordCTF-2021/">FWordCTF 2021</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="ctf">
+                <span class="iconfont-archer">&#xe606;</span>
+                ctf
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AIS3">
+                <span class="iconfont-archer">&#xe606;</span>
+                AIS3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="forensics">
+                <span class="iconfont-archer">&#xe606;</span>
+                forensics
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="wargame">
+                <span class="iconfont-archer">&#xe606;</span>
+                wargame
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="2022">
+                <span class="iconfont-archer">&#xe606;</span>
+                2022
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="rop">
+                <span class="iconfont-archer">&#xe606;</span>
+                rop
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ROP Emporium">
+                <span class="iconfont-archer">&#xe606;</span>
+                ROP Emporium
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="pwn">
+                <span class="iconfont-archer">&#xe606;</span>
+                pwn
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://jeff14994.github.io",
+        root: siteMetaRoot,
+        author: "atx0mg"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

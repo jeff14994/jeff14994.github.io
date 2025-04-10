@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+    
+
+<!-- keywords -->
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="author" content="atx0mg">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="atx0mg">
+    
+        <meta name="keywords" content="hexo,hexo-theme,hexo-blog">
+    
+    <meta name="description" content="">
+    <meta name="description" content="Forensicslistening? Challenge description  Read More →">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FWordCTF 2021">
+<meta property="og:url" content="https://jeff14994.github.io/2021/08/28/FWordCTF-2021/index.html">
+<meta property="og:site_name" content="atx0mg">
+<meta property="og:description" content="Forensicslistening? Challenge description  Read More →">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/v24T55T.jpg">
+<meta property="og:image" content="https://i.imgur.com/7DMVTYj.jpg">
+<meta property="og:image" content="https://i.imgur.com/EcHxJoS.jpg">
+<meta property="og:image" content="https://i.imgur.com/uhRP0uR.png">
+<meta property="og:image" content="https://i.imgur.com/jKDNMlF.jpg">
+<meta property="og:image" content="https://i.imgur.com/aXRBAM4.jpg">
+<meta property="og:image" content="https://i.imgur.com/apJoHwi.jpg">
+<meta property="og:image" content="https://i.imgur.com/oPDP4hL.jpg">
+<meta property="og:image" content="https://i.imgur.com/M04Gwdd.jpg">
+<meta property="article:published_time" content="2021-08-28T09:42:17.000Z">
+<meta property="article:modified_time" content="2025-04-10T03:37:48.563Z">
+<meta property="article:author" content="atx0mg">
+<meta property="article:tag" content="ctf">
+<meta property="article:tag" content="forensics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/v24T55T.jpg">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="icon" href="/assets/portfolio.ico">
+    
+    <title>FWordCTF 2021 · atx0mg&#39;s Fortress</title>
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+    (function (w) {
+        'use strict'
+        // rel=preload support test
+        if (!w.loadCSS) {
+            w.loadCSS = function () {}
+        }
+        // define on the loadCSS obj
+        var rp = (loadCSS.relpreload = {})
+        // rel=preload feature support test
+        // runs once and returns a function for compat purposes
+        rp.support = (function () {
+            var ret
+            try {
+                ret = w.document.createElement('link').relList.supports('preload')
+            } catch (e) {
+                ret = false
+            }
+            return function () {
+                return ret
+            }
+        })()
+
+        // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+        // then change that media back to its intended value on load
+        rp.bindMediaToggle = function (link) {
+            // remember existing media attr for ultimate state, or default to 'all'
+            var finalMedia = link.media || 'all'
+
+            function enableStylesheet() {
+                link.media = finalMedia
+            }
+
+            // bind load handlers to enable media
+            if (link.addEventListener) {
+                link.addEventListener('load', enableStylesheet)
+            } else if (link.attachEvent) {
+                link.attachEvent('onload', enableStylesheet)
+            }
+
+            // Set rel and non-applicable media type to start an async request
+            // note: timeout allows this to happen async to let rendering continue in IE
+            setTimeout(function () {
+                link.rel = 'stylesheet'
+                link.media = 'only x'
+            })
+            // also enable media after 3 seconds,
+            // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+            setTimeout(enableStylesheet, 3000)
+        }
+
+        // loop through link elements in DOM
+        rp.poly = function () {
+            // double check this to prevent external calls from running
+            if (rp.support()) {
+                return
+            }
+            var links = w.document.getElementsByTagName('link')
+            for (var i = 0; i < links.length; i++) {
+                var link = links[i]
+                // qualify links to those with rel=preload and as=style attrs
+                if (
+                    link.rel === 'preload' &&
+                    link.getAttribute('as') === 'style' &&
+                    !link.getAttribute('data-loadcss')
+                ) {
+                    // prevent rerunning on link
+                    link.setAttribute('data-loadcss', true)
+                    // bind listeners to toggle media back
+                    rp.bindMediaToggle(link)
+                }
+            }
+        }
+
+        // if unsupported, run the polyfill
+        if (!rp.support()) {
+            // run once at least
+            rp.poly()
+
+            // rerun poly on an interval until onload
+            var run = w.setInterval(rp.poly, 500)
+            if (w.addEventListener) {
+                w.addEventListener('load', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            } else if (w.attachEvent) {
+                w.attachEvent('onload', function () {
+                    rp.poly()
+                    w.clearInterval(run)
+                })
+            }
+        }
+
+        // commonjs
+        if (typeof exports !== 'undefined') {
+            exports.loadCSS = loadCSS
+        } else {
+            w.loadCSS = loadCSS
+        }
+    })(typeof global !== 'undefined' ? global : this)
+</script>
+
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 50vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+</style>
+
+    <link rel="preload" href="/css/style.css?v=20211217" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="/css/dark.css?v=20211217" as="style">
+    <link rel="stylesheet" href="/css/dark.css">
+    <link rel="stylesheet" href="/css/mobile.css?v=20211217" media="(max-width: 960px)">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" as="script">
+    <link rel="preload" href="/scripts/main.js?v=20211217" as="script">
+    <link rel="preload" href="/scripts/dark.js?v=20211217" as="script">
+    <link rel="preload" href="/font/Oswald-Regular.ttf" as="font" crossorigin>
+    <link rel="preload" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" as="font" crossorigin>
+    <!-- algolia -->
+    
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 6.1.0"></head>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ == undefined) {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js" />')
+        }
+    </script>
+    
+        <body class="post-body">
+    
+        <!-- header -->
+        <header class="header header-mobile">
+    <!-- top read progress line -->
+    <div class="header-element">
+        <div class="read-progress"></div>
+    </div>
+    <!-- sidebar menu button -->
+    <div class="header-element">
+        
+            <div class="header-sidebar-menu">
+        
+            
+                <div style="padding-left: 1px;">&#xe775;</div>
+            
+        </div>
+    </div>
+    <!-- header actions -->
+    <div class="header-actions">
+        <!-- theme mode switch button -->
+        <span class="header-theme-btn header-element">
+            <i class="fas fa-adjust"></i>
+        </span>
+        <!-- back to home page text -->
+        <span class="home-link header-element">
+            <a href=/>atx0mg's Fortress.</a>
+        </span>
+    </div>
+    <!-- toggle banner for post layout -->
+    
+        
+            <div class="banner">
+        
+            <div class="blog-title header-element">
+                <a href="/">atx0mg&#39;s Fortress.</a>
+            </div>
+            <div class="post-title header-element">
+                <a href="#" class="post-name">FWordCTF 2021</a>
+            </div>
+        </div>
+    
+</header>
+
+        <!-- fixed footer -->
+        <footer class="footer-fixed">
+    <!-- back to top button -->
+    <div class="footer-fixed-element">
+        
+            <div class="back-top back-top-hidden">
+        
+        
+            <div>&#xe639;</div>
+        
+        </div>
+    </div>
+</footer>
+
+        <!-- wrapper -->
+        <div class="wrapper">
+            <div class="site-intro" style="
+
+
+
+
+
+
+
+    height:50vh;
+
+">
+    
+    <!-- 主页  -->
+    
+        
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+                FWordCTF 2021
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+                
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页 meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                    <div class= post-intro-tags >
+    
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="ctf">ctf</a>
+    
+        <a class="post-tag" href="javascript:void(0);" data-tags="forensics">forensics</a>
+    
+</div>
+
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">1k</span>Reading time: <span class="post-count reading-time">6 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <!-- 撰写日期 -->
+                    <span class="iconfont-archer post-intro-calander">&#xe676;</span>
+                    <span class="post-intro-time">2021/08/28</span>
+                    <!-- busuanzi -->
+                    
+                        <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                            <span class="iconfont-archer post-intro-busuanzi">&#xe602;</span>
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    
+                    <!-- 文章分享 -->
+                    <span class="share-wrapper">
+                        <span class="iconfont-archer share-icon">&#xe71d;</span>
+                        <span class="share-text">Share</span>
+                        <ul class="share-list">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+
+            <script>
+  // get user agent
+  function getBrowserVersions() {
+    var u = window.navigator.userAgent
+    return {
+      userAgent: u,
+      trident: u.indexOf('Trident') > -1, //IE内核
+      presto: u.indexOf('Presto') > -1, //opera内核
+      webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+      mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+      ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+      iPad: u.indexOf('iPad') > -1, //是否为iPad
+      webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+      weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+      uc: u.indexOf('UCBrowser') > -1, //是否为android下的UC浏览器
+    }
+  }
+  var browser = {
+    versions: getBrowserVersions(),
+  }
+  console.log('userAgent: ' + browser.versions.userAgent)
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded')
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document
+        .getElementsByClassName('intro-title')[0]
+        .classList.add('intro-fade-in')
+      document
+        .getElementsByClassName('intro-subtitle')[0]
+        .classList.add('intro-fade-in')
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in')
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb() {
+    if (browser.versions.uc) {
+      console.log('UCBrowser')
+      fontLoaded()
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular'],
+        },
+        loading: function () {
+          // 所有字体开始加载
+          // console.log('font loading');
+        },
+        active: function () {
+          // 所有字体已渲染
+          fontLoaded()
+        },
+        inactive: function () {
+          // 字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout')
+          fontLoaded()
+        },
+        timeout: 5000, // Set the timeout to two seconds
+      })
+    }
+  }
+
+  function asyncErr() {
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document,
+      t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0]
+    o.src = u
+    if (cb) {
+      o.addEventListener(
+        'load',
+        function (e) {
+          cb(null, e)
+        },
+        false
+      )
+    }
+    if (err) {
+      o.addEventListener(
+        'error',
+        function (e) {
+          err(null, e)
+        },
+        false
+      )
+    }
+    s.parentNode.insertBefore(o, s)
+  }
+
+  var asyncLoadWithFallBack = function (arr, success, reject) {
+    var currReject = function () {
+      reject()
+      arr.shift()
+      if (arr.length) async(arr[0], success, currReject)
+    }
+
+    async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack(
+    [
+      'https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js',
+      'https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js',
+      "/lib/webfontloader.min.js",
+    ],
+    asyncCb,
+    asyncErr
+  )
+</script>
+
+            <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+            <div class="container container-unloaded">
+                <main class="main post-page">
+    <article class="article-entry">
+        <h1 id="Forensics"><a href="#Forensics" class="headerlink" title="Forensics"></a>Forensics</h1><h3 id="listening"><a href="#listening" class="headerlink" title="listening?"></a><code>listening?</code></h3><ul>
+<li>Challenge description<br><img src="https://i.imgur.com/v24T55T.jpg"></li>
+</ul>
+<p><a href="https://jeff14994.github.io/2021/08/28/FWordCTF-2021/" target="_self">Read More →</a></p>
+<span id="more"></span>
+<h3 id="Got-a-pcpa-file-challenge-pcap"><a href="#Got-a-pcpa-file-challenge-pcap" class="headerlink" title="Got a pcpa file (challenge.pcap)"></a>Got a pcpa file (challenge.pcap)</h3><ul>
+<li><p>By Wireshark, I opened the pcap file and found it was about 9 seconds record of the packets<br><img src="https://i.imgur.com/7DMVTYj.jpg"></p>
+</li>
+<li><p>I mainly focused on HTTP Stream, so I filtered “http” in Wireshark and found something interesting.<br><img src="https://i.imgur.com/EcHxJoS.jpg"></p>
+</li>
+<li><p>Because of the form items I observed (shown as the image below), It made a <code>POST</code> request to <code>oauth2.googleapis.com/token</code>. I guessed it made a API call before, so I recreated the payload from the pcap, and tried to make the same API call again.<br><img src="https://i.imgur.com/uhRP0uR.png"></p>
+</li>
+</ul>
+<h3 id="Made-a-google-API-call"><a href="#Made-a-google-API-call" class="headerlink" title="Made a google API call"></a>Made a google API call</h3><ul>
+<li><p>Payload</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST https://oauth2.googleapis.com/token -d <span class="string">&quot;client_secret=AER8VvrXuFfYfqjhidcekAM0&amp;grant_type=refresh_token&amp;refresh_token=1//044y6gZR87Kl0CgYIARAAGAQSNwF-L9IrkAFpIJPMhiGY0OPJpo5RiA5_7R-mHH-kuHwCMUeFL2JqxevGr23oBJmaxdnrD52t3X4&amp;client_id=1097638694557-3v745luessc34bkoiqkf8tndqgvbqjpm.apps.googleusercontent.com&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Got an access token json. Besides, I found this access token was for reading gmail’s messages only.</p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;access_token&quot;</span>: <span class="string">&quot;ya29.a0ARrdaM9yn8BOV1WE517K_qMViaktMBVtkz3y19-hdqllimqBrXhgXmyhpPDFzAq8N42YBLjuwCLebbj78RWZCL02Pve_gfEabr_e5FFDo1BoXrNWgHj5dVIAn-lglixXue6XFc9nWsO4zRcJTTKxm39SkxxVFw&quot;</span>,</span><br><span class="line">  <span class="string">&quot;expires_in&quot;</span>: <span class="number">3599</span>,</span><br><span class="line">  <span class="string">&quot;scope&quot;</span>: <span class="string">&quot;https://www.googleapis.com/auth/gmail.readonly&quot;</span>,</span><br><span class="line">  <span class="string">&quot;token_type&quot;</span>: <span class="string">&quot;Bearer&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>Created token.json to store credentials</p>
+  <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;client_secret&quot;</span><span class="punctuation">:</span> <span class="string">&quot;AER8VvrXuFfYfqjhidcekAM0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;grant_type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;refresh_token&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;refresh_token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1//044y6gZR87Kl0CgYIARAAGAQSNwF-L9IrkAFpIJPMhiGY0OPJpo5RiA5_7R-mHH-kuHwCMUeFL2JqxevGr23oBJmaxdnrD52t3X4&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;client_id&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1097638694557-3v745luessc34bkoiqkf8tndqgvbqjpm.apps.googleusercontent.com&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;access_token&quot;</span><span class="punctuation">:</span> <span class="string">&quot;ya29.a0ARrdaM9yn8BOV1WE517K_qMViaktMBVtkz3y19-hdqllimqBrXhgXmyhpPDFzAq8N42YBLjuwCLebbj78RWZCL02Pve_gfEabr_e5FFDo1BoXrNWgHj5dVIAn-lglixXue6XFc9nWsO4zRcJTTKxm39SkxxVFw&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;expires_in&quot;</span><span class="punctuation">:</span> <span class="number">3599</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scope&quot;</span><span class="punctuation">:</span> <span class="string">&quot;https://www.googleapis.com/auth/gmail.readonly&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;token_type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Bearer&quot;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Interactive-with-Google-gmail-API"><a href="#Interactive-with-Google-gmail-API" class="headerlink" title="Interactive with Google gmail API"></a>Interactive with Google gmail API</h3></li>
+<li><p>I run the Python script on <a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1XtNzIoqCkYQY9pzlZEYtV-PeP7IGOHz7?usp=sharing">colab</a>, the script is shown as following block.</p>
+</li>
+<li><p>It simply provided the credentials to google authentication api’s to get the privilege to read someone’s gmail messages.</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">from</span> googleapiclient.discovery <span class="keyword">import</span> build</span><br><span class="line"><span class="keyword">from</span> google_auth_oauthlib.flow <span class="keyword">import</span> InstalledAppFlow</span><br><span class="line"><span class="keyword">from</span> google.auth.transport.requests <span class="keyword">import</span> Request</span><br><span class="line"><span class="keyword">from</span> google.oauth2.credentials <span class="keyword">import</span> Credentials</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">import</span> base64</span><br><span class="line"><span class="keyword">import</span> email</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"></span><br><span class="line"><span class="comment"># If modifying these scopes, delete the file token.json.</span></span><br><span class="line">SCOPES = [<span class="string">&#x27;https://www.googleapis.com/auth/gmail.readonly&#x27;</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    <span class="string">&quot;&quot;&quot;Shows basic usage of the Gmail API.</span></span><br><span class="line"><span class="string">    Lists the user&#x27;s Gmail labels.</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    creds = <span class="literal">None</span></span><br><span class="line">    <span class="comment"># The file token.json stores the user&#x27;s access and refresh tokens, and is</span></span><br><span class="line">    <span class="comment"># created automatically when the authorization flow completes for the first</span></span><br><span class="line">    <span class="comment"># time.</span></span><br><span class="line">    <span class="keyword">if</span> os.path.exists(<span class="string">&#x27;token.json&#x27;</span>):</span><br><span class="line">        creds = Credentials.from_authorized_user_file(<span class="string">&#x27;token.json&#x27;</span>, SCOPES)</span><br><span class="line">    <span class="comment"># If there are no (valid) credentials available, let the user log in.</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> creds <span class="keyword">or</span> <span class="keyword">not</span> creds.valid:</span><br><span class="line">        <span class="keyword">if</span> creds <span class="keyword">and</span> creds.expired <span class="keyword">and</span> creds.refresh_token:</span><br><span class="line">            creds.refresh(Request())</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            flow = InstalledAppFlow.from_client_secrets_file(</span><br><span class="line">                <span class="string">&#x27;credentials.json&#x27;</span>, SCOPES)</span><br><span class="line">            creds = flow.run_local_server(port=<span class="number">0</span>)</span><br><span class="line">        <span class="comment"># Save the credentials for the next run</span></span><br><span class="line">        <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;token.json&#x27;</span>, <span class="string">&#x27;w&#x27;</span>) <span class="keyword">as</span> token:</span><br><span class="line">            token.write(creds.to_json())</span><br><span class="line"></span><br><span class="line">    service = build(<span class="string">&#x27;gmail&#x27;</span>, <span class="string">&#x27;v1&#x27;</span>, credentials=creds)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># Call the Gmail API</span></span><br><span class="line"></span><br><span class="line">    result = service.users().messages().<span class="built_in">list</span>(userId=<span class="string">&#x27;me&#x27;</span>).execute()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># We can also pass maxResults to get any number of emails. Like this:</span></span><br><span class="line">    <span class="comment"># result = service.users().messages().list(maxResults=200, userId=&#x27;me&#x27;).execute()</span></span><br><span class="line">    messages = result.get(<span class="string">&#x27;messages&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># messages is a list of dictionaries where each dictionary contains a message id.</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># iterate through all the messages</span></span><br><span class="line">    <span class="keyword">for</span> msg <span class="keyword">in</span> messages:</span><br><span class="line">        <span class="comment"># Get the message from its id</span></span><br><span class="line">        txt = service.users().messages().get(userId=<span class="string">&#x27;me&#x27;</span>, <span class="built_in">id</span>=msg[<span class="string">&#x27;id&#x27;</span>]).execute()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Use try-except to avoid any Errors</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="comment"># Get value of &#x27;payload&#x27; from dictionary &#x27;txt&#x27;</span></span><br><span class="line">            payload = txt[<span class="string">&#x27;payload&#x27;</span>]</span><br><span class="line">            headers = payload[<span class="string">&#x27;headers&#x27;</span>]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Look for Subject and Sender Email in the headers</span></span><br><span class="line">            <span class="keyword">for</span> d <span class="keyword">in</span> headers:</span><br><span class="line">                <span class="keyword">if</span> d[<span class="string">&#x27;name&#x27;</span>] == <span class="string">&#x27;Subject&#x27;</span>:</span><br><span class="line">                    subject = d[<span class="string">&#x27;value&#x27;</span>]</span><br><span class="line">                <span class="keyword">if</span> d[<span class="string">&#x27;name&#x27;</span>] == <span class="string">&#x27;From&#x27;</span>:</span><br><span class="line">                    sender = d[<span class="string">&#x27;value&#x27;</span>]</span><br><span class="line"></span><br><span class="line">            <span class="comment"># The Body of the message is in Encrypted format. So, we have to decode it.</span></span><br><span class="line">            <span class="comment"># Get the data and decode it with base 64 decoder.</span></span><br><span class="line">            parts = payload.get(<span class="string">&#x27;parts&#x27;</span>)[<span class="number">0</span>]</span><br><span class="line">            data = parts[<span class="string">&#x27;body&#x27;</span>][<span class="string">&#x27;data&#x27;</span>]</span><br><span class="line">            data = data.replace(<span class="string">&quot;-&quot;</span>,<span class="string">&quot;+&quot;</span>).replace(<span class="string">&quot;_&quot;</span>,<span class="string">&quot;/&quot;</span>)</span><br><span class="line">            decoded_data = base64.b64decode(data)</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Now, the data obtained is in lxml. So, we will parse </span></span><br><span class="line">            <span class="comment"># it with BeautifulSoup library</span></span><br><span class="line">            soup = BeautifulSoup(decoded_data , <span class="string">&quot;lxml&quot;</span>)</span><br><span class="line">            body = soup.body()</span><br><span class="line"></span><br><span class="line">            <span class="comment"># Printing the subject, sender&#x27;s email and message</span></span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Subject: &quot;</span>, subject)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;From: &quot;</span>, sender)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&quot;Message: &quot;</span>, body)</span><br><span class="line">            <span class="built_in">print</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">        <span class="keyword">except</span>:</span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3></li>
+<li><p>Dump all the mail message (There are about 4000 lines of messages, so I filtered some of them, shown as section below)<br>From the message below, we can obtain the flag:<br><code>FwordCTF&#123;email_forensics_is_interesting_73489nn7n4891&#125;</code></p>
+  <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">Subject:  fwordplayground@gmail.com</span><br><span class="line">From:  Anonymousemail &lt;noreply@anonymousemail.me&gt;</span><br><span class="line">Message:  [&lt;p&gt;fwordplayground@gmail.com fwordplayground@gmail.com fwordplayground@gmail.com fwordplayground@gmail.com fwordplayground@gmail.com</span><br><span class="line">&lt;/p&gt;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Subject:  fwordplayground@gmail.com</span><br><span class="line">From:  Anonymousemail &lt;noreply@anonymousemail.me&gt;</span><br><span class="line">Message:  [&lt;p&gt;Hello everyone</span><br><span class="line">&lt;/p&gt;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Subject:  <span class="number">1</span></span><br><span class="line">From:  Anonymousemail &lt;noreply@anonymousemail.me&gt;</span><br><span class="line">Message:  [&lt;p&gt;Hello everyone, Thank you <span class="keyword">for</span> playing Fword CTF</span><br><span class="line">&lt;/p&gt;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Subject:  Flag</span><br><span class="line">From:  Fword Team &lt;fword.team@gmail.com&gt;</span><br><span class="line">Message:  [&lt;p&gt;FwordCTF&#123;email_forensics_is_interesting_73489nn7n4891&#125;</span><br><span class="line">&lt;/p&gt;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Subject:  Finish setting up your new Google Account</span><br><span class="line">From:  Google Community Team &lt;googlecommunityteam-noreply@google.com&gt;</span><br><span class="line">Message:  [&lt;p&gt;Let<span class="number">&#x27;</span>s get started,</span><br><span class="line"></span><br><span class="line">Welcome to Google. Your new account comes with access to Google products,  </span><br><span class="line">apps, and services.</span><br><span class="line"></span><br><span class="line">Here are a few tips to get you started.</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="CTF-results"><a href="#CTF-results" class="headerlink" title="CTF results"></a>CTF results</h2><h3 id="Place-and-points"><a href="#Place-and-points" class="headerlink" title="Place and points"></a>Place and points</h3><ul>
+<li>We registerd as the ToInfinityAndBeYANd, and got 1356 points resulted in 98 th in the ctf.<br><img src="https://i.imgur.com/jKDNMlF.jpg"><h3 id="Categories"><a href="#Categories" class="headerlink" title="Categories"></a>Categories</h3></li>
+<li>We solved four challenges: one Welcome, one Cryptography, one bash, and one Forensics challenge.<br><img src="https://i.imgur.com/aXRBAM4.jpg"><br><img src="https://i.imgur.com/apJoHwi.jpg"></li>
+</ul>
+<h3 id="Members-I-am-x0mg"><a href="#Members-I-am-x0mg" class="headerlink" title="Members - I am @x0mg"></a>Members - I am @x0mg</h3><ul>
+<li>I solved the Froensics challenge, although I put a lot of time in osint and reverse engineering but had no good outcome.<br><img src="https://i.imgur.com/oPDP4hL.jpg"><h3 id="Score-over-time"><a href="#Score-over-time" class="headerlink" title="Score over time"></a>Score over time</h3></li>
+<li><img src="https://i.imgur.com/M04Gwdd.jpg"></li>
+</ul>
+<h2 id="Resources"><a href="#Resources" class="headerlink" title="Resources"></a>Resources</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/gmail/api/quickstart/python">Gmail API Quickstart</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/how-to-read-emails-from-gmail-using-gmail-api-in-python/">Read email</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.google.com/oauthplayground/">Google Developers - OAuth 2.0 Playground</a></li>
+</ul>
+
+    </article>
+    <!-- license -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://jeff14994.github.io">atx0mg</a>
+            <p>Link：<a href="https://jeff14994.github.io/2021/08/28/FWordCTF-2021/">https://jeff14994.github.io/2021/08/28/FWordCTF-2021/</a>
+            <p>Publish date：<a href="https://jeff14994.github.io/2021/08/28/FWordCTF-2021/">August 28th 2021, 5:42:17 pm</a>
+            <p>Update date：<a href="https://jeff14994.github.io/2021/08/28/FWordCTF-2021/">April 10th 2025, 11:37:48 am</a>
+            <p>License：This article is licensed under CC BY-NC 4.0</p>
+        </div>
+    
+    <!-- paginator -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href="/2021/09/13/CSAWCTF-2021/" title="CSAWCTF 2021">
+                    <div class="nextTitle">CSAWCTF 2021</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- comment -->
+    
+        <div class="post-comment">
+            <!-- 来必力 City 版安装代码 -->
+
+
+            
+
+            
+
+            
+
+            <!-- utteranc评论 -->
+
+
+            <!-- partial('_partial/comment/changyan') -->
+            <!--PC版-->
+
+
+            
+            
+
+            
+
+        </div>
+    
+    <!-- timeliness note -->
+    <!-- idea from: https://hexo.fluid-dev.com/posts/hexo-injector/#%E6%96%87%E7%AB%A0%E6%97%B6%E6%95%88%E6%80%A7%E6%8F%90%E7%A4%BA -->
+    
+    <!-- Mathjax -->
+    
+</main>
+
+                <!-- profile -->
+                
+            </div>
+            <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+        <div class="social">
+            
+    
+        
+            
+                <a href="mailto:jeff14994 [at] gmail.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/jeff14994" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.facebook.com/jeff.hong.14994" class="iconfont-archer facebook" target="_blank" title=facebook></a>
+            
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+            
+                <a href="https://www.linkedin.com/in/jeff14994/" class="iconfont-archer linkedin" target="_blank" title=linkedin></a>
+            
+        
+    
+        
+    
+        
+            
+                <a href="https://hackmd.io/@jeff14994" class="iconfont-archer others" target="_blank" title=others></a>
+            
+        
+    
+        
+    
+
+
+        </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- website approve for Chinese user -->
+    
+    <!-- 不蒜子  -->
+    
+        <div class="busuanzi-container">
+            
+             
+                <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+            
+        </div>
+    	
+</footer>
+
+        </div>
+        <!-- toc -->
+        
+            <div class="toc-wrapper toc-wrapper-loding" style=
+
+
+
+
+
+
+
+    top:50vh;
+
+>
+                <div class="toc-catalog">
+                    <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+                </div>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Forensics"><span class="toc-number">1.</span> <span class="toc-text">Forensics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#listening"><span class="toc-number">1.0.1.</span> <span class="toc-text">listening?</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Got-a-pcpa-file-challenge-pcap"><span class="toc-number">1.0.2.</span> <span class="toc-text">Got a pcpa file (challenge.pcap)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Made-a-google-API-call"><span class="toc-number">1.0.3.</span> <span class="toc-text">Made a google API call</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Interactive-with-Google-gmail-API"><span class="toc-number">1.0.4.</span> <span class="toc-text">Interactive with Google gmail API</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Results"><span class="toc-number">1.0.5.</span> <span class="toc-text">Results</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CTF-results"><span class="toc-number">1.1.</span> <span class="toc-text">CTF results</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Place-and-points"><span class="toc-number">1.1.1.</span> <span class="toc-text">Place and points</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Categories"><span class="toc-number">1.1.2.</span> <span class="toc-text">Categories</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Members-I-am-x0mg"><span class="toc-number">1.1.3.</span> <span class="toc-text">Members - I am @x0mg</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Score-over-time"><span class="toc-number">1.1.4.</span> <span class="toc-text">Score over time</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Resources"><span class="toc-number">1.2.</span> <span class="toc-text">Resources</span></a></li></ol></li></ol>
+            </div>
+        
+        <!-- sidebar -->
+        <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+        <div class="sidebar-panel-archives">
+    <!-- 在 ejs 中将 archive 按照时间排序 -->
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 11
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+        
+            
+            
+            <div class="archive-year"> 2022 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">07/04</span>
+            <a class="archive-post-title" href="/2022/07/04/AIS3-2022-Pre-exam/">AIS3 2022 Pre-exam</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/11</span>
+            <a class="archive-post-title" href="/2022/03/11/write4-rop/">write4 rop</a>
+        </li>
+    
+        
+            
+            
+                
+                </ul>
+            
+            <div class="archive-year"> 2021 </div>
+            <ul class="year-list">
+            
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">12/06</span>
+            <a class="archive-post-title" href="/2021/12/06/MetaCTF-2021/">MetaCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/28</span>
+            <a class="archive-post-title" href="/2021/11/28/TFCCTF-2021/">TFCCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/15</span>
+            <a class="archive-post-title" href="/2021/11/15/K3RN3LCTF-2021/">K3RN3LCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">11/06</span>
+            <a class="archive-post-title" href="/2021/11/06/Dam-CTF-2021/">Dam CTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/31</span>
+            <a class="archive-post-title" href="/2021/10/31/Killer-Queen-CTF-2021/">Killer Queen CTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/23</span>
+            <a class="archive-post-title" href="/2021/10/23/BuckeyeCTF-2021/">BuckeyeCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/19</span>
+            <a class="archive-post-title" href="/2021/09/19/SunshineCTF-2021/">SunshineCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">09/13</span>
+            <a class="archive-post-title" href="/2021/09/13/CSAWCTF-2021/">CSAWCTF 2021</a>
+        </li>
+    
+        
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span>
+            <a class="archive-post-title" href="/2021/08/28/FWordCTF-2021/">FWordCTF 2021</a>
+        </li>
+    
+    </div>
+</div>
+
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+        
+            <span class="sidebar-tag-name" data-tags="ctf">
+                <span class="iconfont-archer">&#xe606;</span>
+                ctf
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="AIS3">
+                <span class="iconfont-archer">&#xe606;</span>
+                AIS3
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="forensics">
+                <span class="iconfont-archer">&#xe606;</span>
+                forensics
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="wargame">
+                <span class="iconfont-archer">&#xe606;</span>
+                wargame
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="2022">
+                <span class="iconfont-archer">&#xe606;</span>
+                2022
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="rop">
+                <span class="iconfont-archer">&#xe606;</span>
+                rop
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="ROP Emporium">
+                <span class="iconfont-archer">&#xe606;</span>
+                ROP Emporium
+            </span>
+        
+            <span class="sidebar-tag-name" data-tags="pwn">
+                <span class="iconfont-archer">&#xe606;</span>
+                pwn
+            </span>
+        
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+        缺失模块，请参考主题文档进行安装配置：https://github.com/fi3ework/hexo-theme-archer#%E5%AE%89%E8%A3%85%E4%B8%BB%E9%A2%98
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+
+    </div>
+</div>
+
+        <!-- site-meta -->
+        <script>
+    var siteMetaRoot = "/"
+    if (siteMetaRoot === "undefined") {
+        siteMetaRoot = '/'
+    }
+    var siteMeta = {
+        url: "https://jeff14994.github.io",
+        root: siteMetaRoot,
+        author: "atx0mg"
+    }
+</script>
+
+        <!-- import experimental options here -->
+        <!-- Custom Font -->
+
+
+        <!-- main func -->
+        <script src="/scripts/main.js?v=20211217"></script>
+        <!-- dark mode -->
+        <script src="/scripts/dark.js?v=20211217"></script>
+        <!-- fancybox -->
+        <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" defer></script>
+        <!-- algolia -->
+        
+        <!-- busuanzi -->
+        
+            <script src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+        
+        <!-- CNZZ -->
+        
+        <!-- async load share.js -->
+        
+            <script src="/scripts/share.js?v=20211217" async></script>
+        
+        <!-- mermaid -->
+        
+    </body>
+</html>
